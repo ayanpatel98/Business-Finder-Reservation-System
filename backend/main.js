@@ -21,7 +21,7 @@ const businesses_reviews = require('./business_reviews')
 app.use('/autocomplete', autocomplete)
 app.use('/businesses/search', businesses_search)
 app.use('/businesses', businesses)
-app.use('/businesses_reviews', businesses_reviews)
+app.use('/businesses/reviews', businesses_reviews)
 
 // Create Server
 app.listen(port, () => {

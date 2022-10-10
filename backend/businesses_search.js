@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
             'latitude': 34.003,
             'longitude': -118.2863,
             'categories': 'food',
-            'radius': 1,
+            'radius': 30000,
         }
     }
 
@@ -24,7 +24,6 @@ router.get('/', (req, res) => {
 
     axios.get(base_url+'businesses/search', config)
         .then(function (response) {
-            console.log(response)
 
             response.data.businesses.forEach(element => {
                 business_obj.push({
@@ -37,11 +36,10 @@ router.get('/', (req, res) => {
                 })
             });
             
-            res.json(business_obj)
+            res.json({'status' : response.status, 'response' : business_obj});
         })
         .catch(function (error) {
-            console.log(error);
-            res.send(error)
+            res.json({'status':error.response.status, 'response' : []});
         })
 })
 

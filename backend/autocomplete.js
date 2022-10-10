@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
     let config = {
         headers:HEADERS,
         params:{
-            'text': 'ice'
+            'text': 'cube'
         }
     }
 
@@ -28,11 +28,11 @@ router.get('/', (req, res) => {
         .then(function (response) {
             auto_list = response['data']['categories']
             // console.log(response.status);
-            res.json(auto_list);
+            res.json({'status' : response.status, 'response' : auto_list});
         })
         .catch(function (error) {
             // #Send Error Status
-            res.json({status:error.response.status})
+            res.json({'status':error.response.status, 'response' : []});
         });
 })
 
