@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { BusinessModuleRoutingModule } from './business-module-routing.module';
 import { SearchComponent } from './search/search.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -11,7 +14,11 @@ import { SearchComponent } from './search/search.component';
   ],
   imports: [
     CommonModule,
-    BusinessModuleRoutingModule
+    BusinessModuleRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTabsModule,
+    HttpClientModule,
   ]
 })
 export class BusinessModuleModule { }

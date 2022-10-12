@@ -4,6 +4,7 @@ const { response } = require('express');
 const router = express.Router()
 const base_url = require('./main.js').base_url;
 const HEADERS = require('./main.js').headers;
+// const cors = require('cors');
 
 // const base_url = 'https://api.yelp.com/v3/'
 // const api_key = 'uQGYSvwIBI7fLrs1DQFuL85V1ZPNBiwSLSlsSucGmAe319_tqpUs-FeyRFGJ6WudJ_EFx-gWLKCvdYWONxicky4gm7K93LhK1GT6U3P5GZXXJZzCIEq593EZPQsdY3Yx'
@@ -18,7 +19,7 @@ router.get('/', (req, res) => {
     let config = {
         headers:HEADERS,
         params:{
-            'text': 'cube'
+            'text': 'ice'
         }
     }
 
