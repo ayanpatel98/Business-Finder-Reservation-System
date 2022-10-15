@@ -3,22 +3,31 @@ const axios = require('axios');
 const router = express.Router()
 const base_url = require('./main.js').base_url;
 const HEADERS = require('./main.js').headers;
+const cors = require('cors');
 
 
 // Business Search Table
-router.get('/', (req, res) => {
+router.get('/', cors(), (req, res) => {
     
     // Payload
     let config = {
         headers:HEADERS,
+        // params:{
+        //     'term': 'ice',
+        //     'latitude': 34.003,
+        //     'longitude': -118.2863,
+        //     'categories': 'food',
+        //     'radius': 30000,
+        // }
         params:{
-            'term': 'ice',
-            'latitude': 34.003,
-            'longitude': -118.2863,
-            'categories': 'food',
-            'radius': 30000,
+            'term': req.query.term,
+            'latitude': req.query.latitude,
+            'longitude': req.query.longitude,
+            'categories': req.query.categories,
+            'radius': req.query.radius,
         }
     }
+    console.log(config.params);
 
     business_obj = []
 

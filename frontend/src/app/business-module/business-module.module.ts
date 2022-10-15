@@ -6,11 +6,14 @@ import { SearchComponent } from './search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HttpClientModule } from '@angular/common/http';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { SearchTableComponent } from './search-table/search-table.component';
 
 
 @NgModule({
   declarations: [
-    SearchComponent
+    SearchComponent,
+    SearchTableComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatTabsModule,
     HttpClientModule,
+    MatAutocompleteModule
   ]
 })
 export class BusinessModuleModule { }
