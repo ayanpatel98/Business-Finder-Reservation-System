@@ -8,12 +8,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HttpClientModule } from '@angular/common/http';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SearchTableComponent } from './search-table/search-table.component';
+import { SearchDetailsComponent } from './search-details/search-details.component';
 
 
 @NgModule({
   declarations: [
     SearchComponent,
-    SearchTableComponent
+    SearchTableComponent,
+    SearchDetailsComponent
   ],
   imports: [
     CommonModule,

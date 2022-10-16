@@ -1,0 +1,63 @@
+
+.busiSearch {
+    /* width: 75%; */
+    width: 1000px;
+    color: black;
+}
+.busiSearch table{
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    border-spacing: 0px;
+}
+.busiSearch table th{
+    /* width: 100%; */
+    text-align: center;
+    background-color: #4562A2;
+    border-right: 1px solid lightgray;
+}
+
+/* .busiSearch table th a {
+    display: block;
+    cursor: pointer;
+    line-height: 50px;
+} */
+
+.busiSearch table td a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+.busiSearch table td a:hover {
+    color: gray;
+    cursor: pointer;
+}
+.busiSearch table td {
+    border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    padding: 3px 3px 0px 3px;
+}
+
+/* right most column of the table */
+.busiSearch table td:last-child {
+    border-right: none;
+}
+
+/* Last row of table */
+.busiSearch table tr:last-child td {
+    border-bottom: none;
+}
+
+.busiSearch table tr:first-child {
+    height: 50px;
+}
+
+.busiSearch table tr {
+    border-bottom: 1px solid black;
+    height: 106px;
+}
+
+.busiSearch img {
+    height: 100px;
+    width: 100px;
+}

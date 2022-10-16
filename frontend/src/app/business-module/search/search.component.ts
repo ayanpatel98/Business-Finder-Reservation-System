@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { pipe } from 'rxjs';
 import { debounceTime, tap, switchMap, finalize, distinctUntilChanged, filter } from 'rxjs/operators';
+import { submitParams } from '../model';
 import { SearchService } from '../search.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class SearchComponent implements OnInit {
   latitude: any = '';
   longitude: any = '';
   isLocationValid: boolean = false;
-  searchParams:Object;
+  searchParams:submitParams;
 
   constructor(private formBuilder: FormBuilder,
     private myserv: SearchService,
@@ -96,6 +97,7 @@ export class SearchComponent implements OnInit {
       let radius = String(Number(this.searchForm.controls['distance'].value)*1609);
       this.myserv.getSearchTable(term,latitude,longitude,categories,radius).subscribe(res =>{
         console.log(res);
+        this.searchParams = res
       });
     // }
   }

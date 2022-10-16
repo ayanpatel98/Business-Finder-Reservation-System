@@ -34,5 +34,9 @@ export class SearchService {
     return this.httpserv.get(base_backend_api+`/businesses/search?term=${term}&latitude=${latitude}&longitude=${longitude}&categories=${categories}&radius=${radius}`)
   }
 
+  getBusinessDetails(b_id: string): Observable<searchTable> {
+    return this.httpserv.get(base_backend_api+`/businesses?b_id=${b_id}`)
+  }
+
 }
 

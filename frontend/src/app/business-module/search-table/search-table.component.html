@@ -1,1 +1,31 @@
-<p>search-table works!</p>
+
+<div class="busiSearch">
+    <table *ngIf="this.searchBoxParams!= undefined && this.searchBoxParams['response'].length>0">
+        <tr>
+            <th>#</th>
+            <th style='width:5%;'>Image</th>
+            <th style='width:8%;'>Business Name</th>
+            <th style='width:55%;'>Rating</th>
+            <th style='width:15%;'>Distance (Miles)</th>
+        </tr>
+        <tr *ngFor="let cell of tableData">
+            <td><a (click)="businessDetails(cell['id'])">{{cell['idx']}}</a></td>
+            <td><a (click)="businessDetails(cell['id'])"><img src="{{cell['image_url']}}" alt="{{cell['name']}}"></a></td>
+            <td><a (click)="businessDetails(cell['id'])">{{cell['name']}}</a></td>
+            <td><a (click)="businessDetails(cell['id'])">{{cell['rating']}}</a></td>
+            <td><a (click)="businessDetails(cell['id'])">{{(cell['distance'])/1609 | number:'1.2-2'}}</a></td>
+        </tr>
+    </table>
+
+    <div *ngIf="this.searchBoxParams!= undefined && this.searchBoxParams['response'].length==0">
+        <div style="background-color: white;">
+            Records not Found
+        </div>
+    </div>
+</div>
+
+<div class="mt-5">
+    <app-search-details>
+
+    </app-search-details>
+</div>
