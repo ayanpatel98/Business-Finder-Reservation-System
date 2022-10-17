@@ -38,5 +38,9 @@ export class SearchService {
     return this.httpserv.get(base_backend_api+`/businesses?b_id=${b_id}`)
   }
 
+  getBusinessReviews(b_id: string): Observable<searchTable> {
+    return this.httpserv.get(base_backend_api+`/businesses/reviews?b_id=${b_id}`)
+  }
+
 }
 

@@ -17,6 +17,7 @@ export interface geoResponse{
 export interface searchTable{
     results?: any,
     status?: any,
+    response?: any
 }
 
 export interface searchTableData {
@@ -32,13 +33,27 @@ export interface submitParams{
     response?: any,
     status?: any,
 }
-// BusinessDetails
+
+// Detail Section
 export interface businessDetails {
-    idx?:any,
     categories?: any,
-    distance?: any,
+    display_address?: any[],
+    display_phone?: any,
     id?: any,
-    image_url?: any,
+    is_closed?: any,
+    is_open_now?:any,
+    more_info?: string,
+    name?: any,
+    photos?: any[],
+    price?: any,
+    transactions?: any[],
+    0?: any,
+}
+// Reviews Section
+export interface reviews {
+    id?: any,
     name?: any,
     rating?: any,
+    text?: any,
+    time_created?: any,
 }

@@ -4,17 +4,19 @@ const { response } = require('express');
 const router = express.Router()
 const base_url = require('./main.js').base_url;
 const HEADERS = require('./main.js').headers;
+const cors = require('cors');
 
 
 // Reviews Route
-router.get('/', (req, res) => {    
+router.get('/', cors(), (req, res) => {    
     // Payload
     let config = {
         headers:HEADERS
     }
+    let b_id = String(req.query.b_id);
 
-
-    axios.get(base_url+`businesses/7XhSOz47twW5yGLTgTaREw/reviews`, config)
+    // axios.get(base_url+`businesses/7XhSOz47twW5yGLTgTaREw/reviews`, config)
+    axios.get(base_url+`businesses/`+b_id+`/reviews`, config)
         .then(function (response) {
             let review_list=[]
             if('reviews' in response.data && Object.keys(response.data.reviews).length > 0) {

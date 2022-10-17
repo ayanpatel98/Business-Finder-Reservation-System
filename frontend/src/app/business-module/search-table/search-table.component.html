@@ -1,6 +1,6 @@
 
 <div class="busiSearch">
-    <table *ngIf="this.searchBoxParams!= undefined && this.searchBoxParams['response'].length>0">
+    <table *ngIf="showMainTable">
         <tr>
             <th>#</th>
             <th style='width:5%;'>Image</th>
@@ -25,7 +25,10 @@
 </div>
 
 <div class="mt-5">
-    <app-search-details>
+    <app-search-details  
+    [searchDetailParams]="searchDetailParams" 
+    [reviewParams]="reviewParams"
+    (goBackEvent)="showTable($event)">
 
     </app-search-details>
 </div>
