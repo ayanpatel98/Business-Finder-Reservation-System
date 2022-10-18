@@ -48,6 +48,7 @@ export interface businessDetails {
     price?: any,
     transactions?: any[],
     0?: any,
+    coordinates?: any,
 }
 // Reviews Section
 export interface reviews {

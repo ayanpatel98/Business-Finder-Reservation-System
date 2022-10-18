@@ -1,64 +1,82 @@
 <div class="container">
-    <div class="row">
-        <div class="col-sm-6 mt-5">
-            <form class="row g-3 p-2 searchBox" [formGroup]="searchForm" (submit)="submit()" [noValidate]="false">
-                <div class="centerAlign">
-                    <h2>Business Search</h2>
-                </div>
-                <div class="col-sm-12">
-                    <label for="keyword" class="form-label">Keyword<span class="star"> *</span></label>
-                    <input type="text" class="form-control" formControlName="keyword" 
-                    [matAutocomplete]="auto" [formControl]="keywordCtrl" required>
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngIf="isLoading" class="is-loading">
-                            <!-- Spinner -->
-                            <div class="spinner-border" role="status" style="vertical-align: middle;">
-                                <span class="sr-only"></span>
-                            </div>
-                        </mat-option>
-                        <ng-container *ngIf="!isLoading">
-                            <mat-option *ngFor="let keyword of filteredKeywords" [value]="keyword.text">
-                                <span>{{ keyword.text }}</span>
-                            </mat-option>
-                        </ng-container>
-                    </mat-autocomplete>
-                </div>
-                <div class="col-md-6">
-                    <label for="distance" class="form-label">Distance (miles)</label>
-                    <input type="text" class="form-control" formControlName="distance" placeholder="10">
-                </div>
-                <div class="col-md-6">
-                    <label for="category" class="form-label">Category<span class="star"> *</span></label>
-                    <select class="form-select" formControlName="category" required>
-                        <option value="All">Default</option>
-                        <option value="arts">Arts & Entertainment</option>
-                        <option value="health">Health & Medical</option>
-                        <option value="hotelstravel">Hotels & Travel</option>
-                        <option value="food">Food</option>
-                        <option value="professional">Professional Services</option>
-                    </select>
-                </div>
-                <div class="col-sm-12">
-                    <label for="location" class="form-label">Location<span class="star"> *</span></label>
-                    <input type="text" class="form-control" formControlName="location" required>
-                </div>
-                <div class="col-sm-12">
-                    <input type="checkbox" formControlName="autodetect"  autocomplete="off"
-                    style="display: inline !important; width: auto !important; height: 12px;"
-                    (change)="autoSelect($event.target)">
-                    <span>Auto-detect my location</span>
-                </div>
-                <div class="col-sm-12">
-                    <button type="submit" class="btn btn-danger">SUBMIT</button>
-                    <button type="reset" class="btn btn-primary">Clear</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link active" style="cursor: pointer;" (click)="showSearch()">Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer;" (click)="showBookings()">My Bookings</a>
+        </li>
+    </ul>
 
-    <div class="row mt-5">
-        <div class="col-sm-8">
-            <app-search-table [searchBoxParams]="searchParams"></app-search-table>
+    <!-- Main search and details section -->
+    <div *ngIf="showSearchComp">
+        <div class="row">
+            <div class="col-sm-6 mt-5">
+                <form class="row g-3 p-2 searchBox" [formGroup]="searchForm" (submit)="submit()" [noValidate]="false">
+                    <div class="centerAlign">
+                        <h2>Business Search</h2>
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="keyword" class="form-label">Keyword<span class="star"> *</span></label>
+                        <input type="text" class="form-control" formControlName="keyword" 
+                        [matAutocomplete]="auto" [formControl]="keywordCtrl" required>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngIf="isLoading" class="is-loading">
+                                <!-- Spinner -->
+                                <div class="spinner-border" role="status" style="vertical-align: middle;">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </mat-option>
+                            <ng-container *ngIf="!isLoading">
+                                <mat-option *ngFor="let keyword of filteredKeywords" [value]="keyword.text">
+                                    <span>{{ keyword.text }}</span>
+                                </mat-option>
+                            </ng-container>
+                        </mat-autocomplete>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="distance" class="form-label">Distance (miles)</label>
+                        <input type="text" class="form-control" formControlName="distance" placeholder="10">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="category" class="form-label">Category<span class="star"> *</span></label>
+                        <select class="form-select" formControlName="category" required>
+                            <option value="All">Default</option>
+                            <option value="arts">Arts & Entertainment</option>
+                            <option value="health">Health & Medical</option>
+                            <option value="hotelstravel">Hotels & Travel</option>
+                            <option value="food">Food</option>
+                            <option value="professional">Professional Services</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="location" class="form-label">Location<span class="star"> *</span></label>
+                        <input type="text" class="form-control" formControlName="location" required>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="checkbox" formControlName="autodetect"  autocomplete="off"
+                        style="display: inline !important; width: auto !important; height: 12px;"
+                        (change)="autoSelect($event.target)">
+                        <span>Auto-detect my location</span>
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-danger">SUBMIT</button>
+                        <button type="reset" class="btn btn-primary">Clear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        <div class="row mt-5">
+            <div class="col-sm-8">
+                <app-search-table [searchBoxParams]="searchParams"></app-search-table>
+            </div>
         </div>
     </div>
+    
+    <!-- My Bookigs section -->
+    <div *ngIf="showBookingsComp">
+        Mybookings Working
+    </div>
+      
 </div>

@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SearchTableComponent } from './search-table/search-table.component';
 import { SearchDetailsComponent } from './search-details/search-details.component';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { SearchDetailsComponent } from './search-details/search-details.componen
     ReactiveFormsModule,
     MatTabsModule,
     HttpClientModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    GoogleMapsModule
   ]
 })
 export class BusinessModuleModule { }

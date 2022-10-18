@@ -15,8 +15,8 @@ export class SearchTableComponent implements OnInit, OnChanges {
   @Input() searchBoxParams: any;
   tableData: searchTableData[];
 
-  searchDetailParams: submitParams;
-  reviewParams: submitParams;
+  searchDetailParams: submitParams  | undefined;
+  reviewParams: submitParams  | undefined;
   constructor(private formBuilder: FormBuilder,
     private myserv: SearchService,) { }
 
@@ -25,7 +25,12 @@ export class SearchTableComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.searchBoxParams, 'ej9843o');
+    console.log(this.searchBoxParams, 'Second');
+
+    // Reset the details section first on change of table component
+    this.searchDetailParams = undefined;
+    this.reviewParams = undefined;
+    
     if (this.searchBoxParams!= undefined && this.searchBoxParams['response'].length>0) {
       this.showMainTable = true;
       let idx = 0;
@@ -42,9 +47,15 @@ export class SearchTableComponent implements OnInit, OnChanges {
       // }
     }
     else if (this.searchBoxParams!= undefined && this.searchBoxParams['response'].length==0){
-      this.tableData=[]
+      this.tableData=[];
       this.showMainTable = false;
+      // To reset the details section
+      this.reviewParams ==  undefined; 
+      this.searchDetailParams ==  undefined; 
     }
+    // else if (this.searchBoxParams == undefined) {
+      
+    // }
   }
 
   // Business Details Box

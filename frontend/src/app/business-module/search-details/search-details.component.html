@@ -1,6 +1,6 @@
 <div class="businessContentDetail"  *ngIf="showDetailsSection" style="background-color: white;">
     <div class="busiDetail">
-        <button (click)="goBack()">Submit</button>
+        <button (click)="goBack()">Back</button>
         <br>
         <div class="centerAlign">{{sectionData[0]['name']}}</div>
         <mat-tab-group>
@@ -17,7 +17,6 @@
                         </div>
                     </div>
                     <div class="col-sm-12" *ngIf="sectionData[0]['photos'].length>=1">
-                                {{sectionData[0]['photos'].length}}
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                             <div *ngIf="sectionData[0]['photos'].length==1; then thenBlock else elseBlock"></div>
@@ -61,10 +60,53 @@
                             </button>
                           </div>
                     </div>
+                    <div class="col-sm-12" *ngIf="sectionData[0]['photos'].length==0">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img src="" class="d-block w-100" alt="No Photo">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="" class="d-block w-100" alt="No Photo">
+                              </div>
+                              <div class="carousel-item">
+                                <img src="" class="d-block w-100" alt="No Photo">
+                              </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                          </div>
+                    </div>
                 </div>
             </mat-tab>
-            <mat-tab label="Second"> Content 2 </mat-tab>
-            <mat-tab label="Third"> Content 3 </mat-tab>
+            <mat-tab label="Map Location">
+              <div class="row pt-3 pb-3">
+                <div class="col-sm-12">
+                  <google-map [options]="mapOptions">
+                    <map-marker [position]="marker.position"></map-marker>
+                  </google-map>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Reviews">
+              <div class="row">
+                <div class="col-sm-12" *ngFor="let data of displayDataReviews[0]">
+                  <span><b>{{data['name']}}</b></span>
+                  <br>
+                  <span>{{data['rating']}}</span>
+                  <br><br>
+                  <span>{{data['text']}}</span>
+                  <br><br>
+                  <span>{{data['time_created']}}</span>
+                </div>
+              </div>
+            </mat-tab>
         </mat-tab-group>
           
 

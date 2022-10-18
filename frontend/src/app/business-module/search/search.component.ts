@@ -15,6 +15,8 @@ import { SearchService } from '../search.service';
 export class SearchComponent implements OnInit {
   searchForm: FormGroup;
   filteredKeywords :any;
+  showSearchComp: boolean = true;
+  showBookingsComp: boolean = false;
   isLoading = false;
   errorMsg!: string;
   minLengthTerm = 3;
@@ -96,8 +98,14 @@ export class SearchComponent implements OnInit {
       let categories = this.searchForm.controls['category'].value;
       let radius = String(Number(this.searchForm.controls['distance'].value)*1609);
       this.myserv.getSearchTable(term,latitude,longitude,categories,radius).subscribe(res =>{
-        console.log(res);
+        console.log(res, 'first');
         this.searchParams = res
+        // if (res['response'].length!=0) {
+        //   this.searchParams = res;
+        // }
+        // else if (res['response'].length==0) {
+        //   this.searchParams = undefined
+        // }
       });
     // }
   }
@@ -147,6 +155,15 @@ export class SearchComponent implements OnInit {
         }
       });
     }
+  }
+
+  showSearch(){
+    this.showSearchComp = true;
+    this.showBookingsComp = false;
+  }
+  showBookings(){
+    this.showSearchComp = false;
+    this.showBookingsComp = true;
   }
 
 }

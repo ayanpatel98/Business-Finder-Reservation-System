@@ -30,6 +30,7 @@ router.get('/', cors(), (req, res) => {
                     'price': ('price' in response.data) ? response.data['price'] : '',
                     'more_info': response.data['url'],
                     'photos': response.data['photos'],
+                    'coordinates': response.data['coordinates'],
                 }
             );
             res.json({'status' : response.status, 'response' : business_details_data});

@@ -10,6 +10,9 @@ import { SearchService } from '../search.service';
 export class SearchDetailsComponent implements OnInit, OnChanges {
 
   displayData: any[] = []
+  displayDataReviews: any[] = []
+  mapOptions : google.maps.MapOptions;
+  marker : any;
 
   @Input() searchDetailParams: any;
   sectionData: businessDetails;
@@ -28,7 +31,7 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.searchDetailParams, 'details');
+    console.log(this.reviewParams, 'details');
     if (this.searchDetailParams!= undefined && this.reviewParams!=undefined) {
       this.showDetailsSection = true;
       this.sectionData = this.searchDetailParams['response'];
@@ -69,18 +72,36 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
         }
         
       }
-      // if (this.sectionData[0]['more_info']!=''){
-      //   this.displayData.push(
-      //     {title:'Visit yelp for more', value:this.sectionData[0]['more_info']}
-      //   )
-        
-      // }
+    
+      // Google Maps Integration
+    this.mapOptions = {
+        center: { 
+          lat: this.sectionData[0]['coordinates']['latitude'], 
+          lng: this.sectionData[0]['coordinates']['longitude'] 
+        },
+        zoom : 14
+     }
+    this.marker = {
+        position: { 
+          lat: this.sectionData[0]['coordinates']['latitude'], 
+          lng: this.sectionData[0]['coordinates']['longitude'] 
+        },
+     }
 
     }
 
     if (this.reviewParams!=undefined && this.searchDetailParams!= undefined){
-      this.reviewData = this.reviewParams // Reviews might be empty
-      // console.log(this.reviewData, 'reviews');
+      this.reviewData = this.reviewParams['response'] // Reviews might be empty
+      this.displayDataReviews.push(this.reviewData)
+      // console.log(this.displayDataReviews, 'reviews');
+    }
+
+    // Did this bcoz when the details section is being displayed and the user presses sumbit button then we have to close
+    // box and reset the displaydata and reviews array
+    if (this.reviewParams==undefined && this.searchDetailParams ==undefined) {
+      this.displayData = [];
+      this.displayDataReviews = [];
+      this.showDetailsSection = false;
     }
 
     
@@ -110,6 +131,7 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
     this.reviewParams = undefined;
     this.searchDetailParams = undefined;
     this.displayData = [];
+    this.displayDataReviews = [];
     this.goBackEvent.emit(true);
   }
 
