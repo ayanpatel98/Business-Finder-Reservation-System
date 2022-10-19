@@ -1,3 +1,4 @@
+
 <div class="businessContentDetail"  *ngIf="showDetailsSection" style="background-color: white;">
     <div class="busiDetail">
         <button (click)="goBack()">Back</button>
@@ -16,6 +17,13 @@
                             <a href="{{sectionData[0]['more_info']}}" target="_blank">Business Link</a>
                         </div>
                     </div>
+
+                    <div class="col-sm-12">
+                      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Reserve Now
+                      </button>
+                    </div>
+
                     <div class="col-sm-12" *ngIf="sectionData[0]['photos'].length>=1">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
@@ -111,4 +119,67 @@
           
 
     </div>
+</div>
+
+
+
+<!-- Modal -->
+<div *ngIf="showDetailsSection" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reservation Form</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+
+      <div class="modal-body">
+        <div class="centerAlign">{{sectionData[0]['name']}}</div>
+        <form #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit(userForm)">
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label>Email</label>
+              <input type="text" name="email" class="form-control" [(ngModel)]="model.email" #email="ngModel"
+                [ngClass]="{ 'is-invalid': userForm.submitted && email.invalid }" 
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                required>
+              <div class="invalid-feedback" *ngIf="userForm.submitted && email.invalid">
+                <p *ngIf="email.errors">Email is required</p>
+              </div>
+            </div>
+
+            <div class="col-sm-12">
+              <label>Date</label>
+              <input type="date" name="resDate" class="form-control" [(ngModel)]="model.resDate" #resDate="ngModel"
+                placeholder="mm/dd/yyyy" 
+                [min]="todayDate"
+                [ngClass]="{ 'is-invalid': userForm.submitted && resDate.invalid }" required>
+              <div class="invalid-feedback" *ngIf="userForm.submitted && resDate.invalid">
+                <p *ngIf="resDate.errors">Date is required</p>
+              </div>
+            </div>
+
+            <label>Time</label>
+            <div class="col-sm-3">
+              <input type="date" name="resDate" class="form-control" [(ngModel)]="model.resDate" #resDate="ngModel"
+              [ngClass]="{ 'is-invalid': userForm.submitted && resDate.invalid }" required>
+            </div>
+            :
+            <div class="col-sm-3">
+              <input type="date" name="resDate" class="form-control" [(ngModel)]="model.resDate" #resDate="ngModel"
+              [ngClass]="{ 'is-invalid': userForm.submitted && resDate.invalid }" required>
+            </div>
+
+            <div class="col-sm-12 mt-3">
+              <button class="btn btn-danger" type="submit" style="margin: 0 auto;">Submit form</button>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

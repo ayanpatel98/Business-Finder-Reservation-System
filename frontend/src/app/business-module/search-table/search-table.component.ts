@@ -61,10 +61,13 @@ export class SearchTableComponent implements OnInit, OnChanges {
   // Business Details Box
   businessDetails(b_id:any){
     this.myserv.getBusinessDetails(b_id).subscribe(res =>{
-      // console.log(res);
+      console.log(b_id);
       if(res!= undefined && res['response'].length>0) {
         this.showMainTable = false;
         this.searchDetailParams = res;
+        // Go to the Details section
+        let element: any = document.getElementById('detailBox')
+        element.scrollIntoView();
       }
     });
 

@@ -2,13 +2,19 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { businessDetails, reviews } from '../model';
 import { SearchService } from '../search.service';
 
+export class User {
+  public email!: string;
+  public resDate!: string;
+}
+
 @Component({
   selector: 'app-search-details',
   templateUrl: './search-details.component.html',
   styleUrls: ['./search-details.component.css']
 })
 export class SearchDetailsComponent implements OnInit, OnChanges {
-
+  model = new User();
+  todayDate: any = new Date();
   displayData: any[] = []
   displayDataReviews: any[] = []
   mapOptions : google.maps.MapOptions;
@@ -28,6 +34,8 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
   constructor(private myserv: SearchService,) { }
 
   ngOnInit(): void {
+    this.todayDate = String(this.todayDate.getFullYear()) +'-' + String(new Date().getMonth()+1) 
+    +'-' + String(this.todayDate.getDate())
   }
   
   ngOnChanges(changes: SimpleChanges) {
@@ -106,6 +114,14 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
 
     
   }
+
+
+  onSubmit(form: any) {
+    console.log(form.email);
+    return true
+  }
+
+
   // Covert Category List to String
   getCategories(cat:any){
       let tempCat = cat;
