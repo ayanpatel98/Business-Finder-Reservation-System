@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { pipe } from 'rxjs';
 import { debounceTime, tap, switchMap, finalize, distinctUntilChanged, filter } from 'rxjs/operators';
+import { __values } from 'tslib';
 import { submitParams } from '../model';
 import { SearchService } from '../search.service';
 
@@ -26,6 +27,8 @@ export class SearchComponent implements OnInit {
   longitude: any = '';
   isLocationValid: boolean = false;
   searchParams:submitParams;
+  localStore:Object | any;
+  loc_keys:any[];
 
   constructor(private formBuilder: FormBuilder,
     private myserv: SearchService,
@@ -34,6 +37,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
  
+    // Autocomplete
     this.keywordCtrl.valueChanges
       .pipe(
         filter(res => {
@@ -70,6 +74,9 @@ export class SearchComponent implements OnInit {
         }
         console.log(this.filteredKeywords, this.keywordCtrl.value);
       });
+
+    this.reservationTable();
+    
   }
   
   createForm() {
@@ -83,15 +90,6 @@ export class SearchComponent implements OnInit {
   }
 
   getTable(): void {
-    // let abc = pipe(()=>console.log('first'), ()=>console.log('second'))
-    // console.log(abc);
-    
-    
-    // if (!this.isLocationValid) {
-    //   this.getGoogleLocation();
-    // }
-
-    // if(this.isLocationValid){
       let term = this.keywordCtrl.value;
       let latitude = this.latitude;
       let longitude = this.longitude;
@@ -100,19 +98,11 @@ export class SearchComponent implements OnInit {
       this.myserv.getSearchTable(term,latitude,longitude,categories,radius).subscribe(res =>{
         console.log(res, 'first');
         this.searchParams = res
-        // if (res['response'].length!=0) {
-        //   this.searchParams = res;
-        // }
-        // else if (res['response'].length==0) {
-        //   this.searchParams = undefined
-        // }
       });
-    // }
   }
 
   // AutoSelect Checkbox function
   autoSelect(target: any) {
-    // console.log(target.checked);
     let locList :any[]
     if (target.checked){
       this.searchForm.get('location')?.disable();
@@ -162,8 +152,43 @@ export class SearchComponent implements OnInit {
     this.showBookingsComp = false;
   }
   showBookings(){
+    this.reservationTable();
     this.showSearchComp = false;
     this.showBookingsComp = true;
+  }
+
+  // Function to enter serial number
+  addSrNo() {
+    if(document.getElementById('reserveStorageTable')!=null){
+      let table = document.getElementById('reserveStorageTable')  as HTMLTableElement;
+      let row_len = table?.rows.length;
+
+      for (let i = 1; i<row_len;i++){
+        table.rows[i].cells[0].innerHTML = String(i);
+      }
+    }
+
+  }
+
+  reservationTable(){
+    if (localStorage!=null){
+      this.localStore={}
+      
+      // {'key':{'val1':values, 'val2':value}}
+      Object.keys(localStorage).forEach(key=>this.localStore[key] = JSON.parse(localStorage[key]))
+      this.loc_keys = Object.keys(this.localStore);
+      console.log(this.loc_keys);
+      
+    }
+    console.log(this.localStore);
+  }
+
+  delete(key:any){
+    console.log(key);
+    localStorage.removeItem(key);
+    delete this.localStore[key];
+    this.loc_keys = Object.keys(this.localStore);
+    
   }
 
 }

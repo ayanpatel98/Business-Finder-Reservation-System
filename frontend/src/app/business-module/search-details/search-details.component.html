@@ -1,11 +1,11 @@
 
-<div class="businessContentDetail"  *ngIf="showDetailsSection" style="background-color: white;">
+<div class="businessContentDetail" id="businessContentDetail" *ngIf="showDetailsSection" style="background-color: white;">
     <div class="busiDetail">
         <button (click)="goBack()">Back</button>
         <br>
         <div class="centerAlign">{{sectionData[0]['name']}}</div>
-        <mat-tab-group>
-            <mat-tab label="Business Details"> 
+        <mat-tab-group (selectedTabChange)="showTabSection()">
+            <mat-tab label="Business Details" > 
                 <div class="row">
                     <div class="col-sm-6 p-3 centerAlign" *ngFor="let data of displayData">
                         <h3>{{data.title}}</h3>
@@ -18,10 +18,15 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12">
-                      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div class="col-sm-12" *ngIf="showSubmitRes">
+                      <button type="button" class="btn btn-danger"
+                      data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Reserve Now
                       </button>
+                    </div>
+                    <div class="col-sm-12" *ngIf="!showSubmitRes">
+                      <button class="btn btn-primary" type="button" (click)="cancelReserv()"
+                       style="margin: 0 auto;">Cancel Reservation</button>
                     </div>
 
                     <div class="col-sm-12" *ngIf="sectionData[0]['photos'].length>=1">
@@ -160,13 +165,31 @@
 
             <label>Time</label>
             <div class="col-sm-3">
-              <input type="date" name="resDate" class="form-control" [(ngModel)]="model.resDate" #resDate="ngModel"
-              [ngClass]="{ 'is-invalid': userForm.submitted && resDate.invalid }" required>
+              <select class="form-select"
+              [(ngModel)]="model.hrs" #hrs="ngModel" name="hrs" class="form-control"
+              [ngClass]="{ 'is-invalid': userForm.submitted && hrs.invalid }"
+              required>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+              </select>
             </div>
             :
             <div class="col-sm-3">
-              <input type="date" name="resDate" class="form-control" [(ngModel)]="model.resDate" #resDate="ngModel"
-              [ngClass]="{ 'is-invalid': userForm.submitted && resDate.invalid }" required>
+              <select class="form-select"
+              [(ngModel)]="model.min" #min="ngModel" name="min" class="form-control"
+              [ngClass]="{ 'is-invalid': userForm.submitted && min.invalid }"
+              required>
+                <option value="00">00</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+              </select>
             </div>
 
             <div class="col-sm-12 mt-3">

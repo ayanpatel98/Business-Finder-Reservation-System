@@ -76,7 +76,36 @@
     
     <!-- My Bookigs section -->
     <div *ngIf="showBookingsComp">
-        Mybookings Working
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <table class="table table-hover" id="reserveStorageTable" (change)="addSrNo()">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Business-Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Email</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of loc_keys">
+                        <td></td>
+                        <td>{{localStore[item]['name']}}</td>
+                        <td>{{localStore[item]['resDate']}}</td>
+                        <td>{{localStore[item]['hrs']}}:{{localStore[item]['min']}}</td>
+                        <td>{{localStore[item]['email']}}</td>
+                        <td>
+                            <a (click)="delete(item)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
     </div>
       
 </div>

@@ -10,6 +10,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SearchTableComponent } from './search-table/search-table.component';
 import { SearchDetailsComponent } from './search-details/search-details.component';
 import { GoogleMapsModule } from '@angular/google-maps'
+import * as $ from 'jquery';
+import * as bootstrap from "bootstrap";
 
 
 @NgModule({

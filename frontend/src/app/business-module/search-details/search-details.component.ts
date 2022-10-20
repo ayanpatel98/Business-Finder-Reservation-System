@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { businessDetails, reviews } from '../model';
 import { SearchService } from '../search.service';
-
 export class User {
   public email!: string;
   public resDate!: string;
+  public hrs!: any;
+  public min!: any;
 }
 
 @Component({
@@ -19,6 +21,7 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
   displayDataReviews: any[] = []
   mapOptions : google.maps.MapOptions;
   marker : any;
+  showSubmitRes:boolean;
 
   @Input() searchDetailParams: any;
   sectionData: businessDetails;
@@ -96,6 +99,14 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
         },
      }
 
+    //  To hide or show reservation button
+     if (localStorage.getItem(this.sectionData[0]['name'])==null){
+      this.showSubmitRes = true;
+     }
+     else{
+      this.showSubmitRes = false;
+     }
+
     }
 
     if (this.reviewParams!=undefined && this.searchDetailParams!= undefined){
@@ -116,11 +127,57 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
   }
 
 
-  onSubmit(form: any) {
-    console.log(form.email);
-    return true
+  onSubmit(form: NgForm) {
+    // Check browser support
+    if (typeof(Storage) !== "undefined") {
+      // Store
+        let a:Object;
+        a = {
+            'name': this.sectionData[0]['name'],
+            'email': form.form.value.email,
+            'resDate': form.form.value.resDate,
+            'hrs': form.form.value.hrs,
+            'min': form.form.value.min,
+          }  
+        localStorage.setItem(this.sectionData[0]['name'], JSON.stringify(a));
+        alert('Reservation Created!');
+        
+        // Close the Modal box
+        $('#exampleModal').modal('hide');
+        form.reset()
+        this.showSubmitRes = false;
+        
+      // }
+      // localStorage.clear()
+      
+    } else {
+      console.log("Sorry, your browser does not support Web Storage...");
+      ;
+    }
   }
 
+  showTabSection() {
+      // // Go to the Details section
+      // let element: any = document.getElementById('businessContentDetail')
+      // element.scrollIntoView();
+      let element: any = document.querySelector('#businessContentDetail')
+      element.scrollIntoView({ behavior: 'instant'});
+    
+  }
+
+  // Show submit button of reservation form
+  cancelReserv(){
+    console.log('Item Removed');
+    localStorage.removeItem(this.sectionData[0]['name']);
+    this.showSubmitRes = true;
+    
+    // if (localStorage.getItem(this.sectionData[0]['name'])==null){
+    //   this.showSubmitRes = true;
+    // }
+    // else{
+    //   this.showSubmitRes = false;
+    // }
+  }
 
   // Covert Category List to String
   getCategories(cat:any){
