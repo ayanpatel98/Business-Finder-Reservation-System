@@ -14,21 +14,23 @@ import { SearchService } from '../search.service';
   providers: [SearchService]
 })
 export class SearchComponent implements OnInit {
-  searchForm: FormGroup;
-  filteredKeywords :any;
   showSearchComp: boolean = true;
   showBookingsComp: boolean = false;
   isLoading = false;
+  isLocationValid: boolean = false;
+  // When the clear button is pressed
+  resetSection:boolean = false;
   errorMsg!: string;
   minLengthTerm = 3;
+  filteredKeywords :any;
   selectedMovie: any = "";
-  keywordCtrl: FormControl = new FormControl();
   latitude: any = '';
   longitude: any = '';
-  isLocationValid: boolean = false;
   searchParams:submitParams;
   localStore:Object | any;
   loc_keys:any[];
+  searchForm: FormGroup;
+  keywordCtrl: FormControl = new FormControl();
 
   constructor(private formBuilder: FormBuilder,
     private myserv: SearchService,
@@ -96,8 +98,9 @@ export class SearchComponent implements OnInit {
       let categories = this.searchForm.controls['category'].value;
       let radius = String(Number(this.searchForm.controls['distance'].value)*1609);
       this.myserv.getSearchTable(term,latitude,longitude,categories,radius).subscribe(res =>{
-        console.log(res, 'first');
-        this.searchParams = res
+        // console.log(res, 'first');
+        this.searchParams = res;
+        this.resetSection = false
       });
   }
 
@@ -141,7 +144,7 @@ export class SearchComponent implements OnInit {
           this.longitude = res['results'][0]['geometry']['location']['lng'];
           // this.isLocationValid = false;
           this.getTable();
-          console.log(this.latitude, this.longitude);
+          // console.log(this.latitude, this.longitude);
         }
       });
     }
@@ -152,21 +155,32 @@ export class SearchComponent implements OnInit {
     this.showBookingsComp = false;
   }
   showBookings(){
+    
+    this.resetAllSections();
     this.reservationTable();
     this.showSearchComp = false;
     this.showBookingsComp = true;
+    this.searchForm.reset();
+    this.searchForm.controls['location'].enable();
+    this.keywordCtrl.reset();
+    this.searchForm.controls['category'].patchValue('All')
+    // console.log(this.searchForm.controls['keyword'].value);
+    this.addSrNo();
+    
   }
 
   // Function to enter serial number
   addSrNo() {
-    if(document.getElementById('reserveStorageTable')!=null){
-      let table = document.getElementById('reserveStorageTable')  as HTMLTableElement;
-      let row_len = table?.rows.length;
+    console.log('loaded');
+    
+    // if(document.getElementById('reserveStorageTable')!=null){
+    //   let table = document.getElementById('reserveStorageTable')  as HTMLTableElement;
+    //   let row_len = table?.rows.length;
 
-      for (let i = 1; i<row_len;i++){
-        table.rows[i].cells[0].innerHTML = String(i);
-      }
-    }
+    //   for (let i = 1; i<row_len;i++){
+    //     table.rows[i].cells[0].innerHTML = String(i);
+    //   }
+    // }
 
   }
 
@@ -177,18 +191,23 @@ export class SearchComponent implements OnInit {
       // {'key':{'val1':values, 'val2':value}}
       Object.keys(localStorage).forEach(key=>this.localStore[key] = JSON.parse(localStorage[key]))
       this.loc_keys = Object.keys(this.localStore);
-      console.log(this.loc_keys);
+      // console.log(this.loc_keys.length);
       
     }
-    console.log(this.localStore);
+    // console.log(this.localStore);
   }
 
   delete(key:any){
-    console.log(key);
+    // console.log(key);
     localStorage.removeItem(key);
+    alert('Reservation cancelled.')
     delete this.localStore[key];
     this.loc_keys = Object.keys(this.localStore);
     
+  }
+
+  resetAllSections() {
+    this.resetSection = true;
   }
 
 }

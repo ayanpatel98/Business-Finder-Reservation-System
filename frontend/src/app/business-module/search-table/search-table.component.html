@@ -1,6 +1,6 @@
 
-<div class="busiSearch">
-    <table *ngIf="showMainTable">
+<div class="busiSearch" *ngIf="!resetSec">
+    <!-- <table *ngIf="showMainTable">
         <tr>
             <th>#</th>
             <th style='width:5%;'>Image</th>
@@ -15,7 +15,27 @@
             <td><a (click)="businessDetails(cell['id'])">{{cell['rating']}}</a></td>
             <td><a (click)="businessDetails(cell['id'])">{{(cell['distance'])/1609 | number:'1.2-2'}}</a></td>
         </tr>
-    </table>
+    </table> -->
+    <table class="table table-hover" *ngIf="showMainTable">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Business Name</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Distance (Miles)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cell of tableData">
+                <td><a (click)="businessDetails(cell['id'])">{{cell['idx']}}</a></td>
+                <td><a (click)="businessDetails(cell['id'])"><img src="{{cell['image_url']}}" alt="{{cell['name']}}"></a></td>
+                <td><a (click)="businessDetails(cell['id'])">{{cell['name']}}</a></td>
+                <td><a (click)="businessDetails(cell['id'])">{{cell['rating']}}</a></td>
+                <td><a (click)="businessDetails(cell['id'])">{{(cell['distance'])/1609 | number:'1.2-2'}}</a></td>
+            </tr>
+        </tbody>
+      </table>
 
     <div *ngIf="this.searchBoxParams!= undefined && this.searchBoxParams['response'].length==0">
         <div style="background-color: white;">
@@ -28,7 +48,8 @@
     <app-search-details id="detailBox"  
     [searchDetailParams]="searchDetailParams" 
     [reviewParams]="reviewParams"
-    (goBackEvent)="showTable($event)">
+    (goBackEvent)="showTable($event)"
+    [resetSectionLast]="resetSec">
 
     </app-search-details>
 </div>

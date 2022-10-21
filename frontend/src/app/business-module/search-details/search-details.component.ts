@@ -23,6 +23,10 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
   marker : any;
   showSubmitRes:boolean;
 
+  // When the clear button is pressed
+  @Input() resetSectionLast: any;
+  resetSecLast: boolean;
+  
   @Input() searchDetailParams: any;
   sectionData: businessDetails;
 
@@ -42,85 +46,89 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.reviewParams, 'details');
-    if (this.searchDetailParams!= undefined && this.reviewParams!=undefined) {
-      this.showDetailsSection = true;
-      this.sectionData = this.searchDetailParams['response'];
+    // console.log(this.searchDetailParams, 'details');
+    this.resetSecLast = this.resetSectionLast
+    if (!this.resetSecLast) {
+      if (this.searchDetailParams!= undefined && this.reviewParams!=undefined) {
+        this.showDetailsSection = true;
+        this.sectionData = this.searchDetailParams['response'];
+        
+        if (this.sectionData[0]['display_address']!=[] || this.sectionData[0]['display_address']!='') {
+          this.displayData.push(
+            {title:'Address', value:this.sectionData[0]['display_address']}
+          )
+        }
+        if (this.sectionData[0]['categories'].length != 0){
+          this.displayData.push(
+            {title:'Category', value:this.getCategories(this.sectionData[0]['categories'])}
+          )
+
+        }
+        if (this.sectionData[0]['display_phone']!=''){
+          this.displayData.push(
+            {title:'Phone', value:this.sectionData[0]['display_phone']}
+          )
+          
+        }
+        if (this.sectionData[0]['price']!=''){
+          this.displayData.push(
+            {title:'Price range', value:this.sectionData[0]['price']}
+          )
+          
+        }
+        if (this.sectionData[0]['is_open_now']!='noStatus'){
+          if (this.sectionData[0]['is_open_now']){
+            this.displayData.push(
+              {title:'Status', value: 'Open'}
+            )
+          }
+          else {
+            this.displayData.push(
+              {title:'Status', value: 'Closed'}
+            )
+          }
+          
+        }
       
-      if (this.sectionData[0]['display_address']!=[] || this.sectionData[0]['display_address']!='') {
-        this.displayData.push(
-          {title:'Address', value:this.sectionData[0]['display_address']}
-        )
+        // Google Maps Integration
+      this.mapOptions = {
+          center: { 
+            lat: this.sectionData[0]['coordinates']['latitude'], 
+            lng: this.sectionData[0]['coordinates']['longitude'] 
+          },
+          zoom : 14
       }
-      if (this.sectionData[0]['categories'].length != 0){
-        this.displayData.push(
-          {title:'Category', value:this.getCategories(this.sectionData[0]['categories'])}
-        )
+      this.marker = {
+          position: { 
+            lat: this.sectionData[0]['coordinates']['latitude'], 
+            lng: this.sectionData[0]['coordinates']['longitude'] 
+          },
+      }
+
+      //  To hide or show reservation button
+      if (localStorage.getItem(this.sectionData[0]['name'])==null){
+        this.showSubmitRes = true;
+      }
+      else{
+        this.showSubmitRes = false;
+      }
 
       }
-      if (this.sectionData[0]['display_phone']!=''){
-        this.displayData.push(
-          {title:'Phone', value:this.sectionData[0]['display_phone']}
-        )
-        
+
+      if (this.reviewParams!=undefined && this.searchDetailParams!= undefined){
+        this.reviewData = this.reviewParams['response'] // Reviews might be empty
+        this.displayDataReviews.push(this.reviewData)
+        // console.log(this.displayDataReviews, 'reviews');
       }
-      if (this.sectionData[0]['price']!=''){
-        this.displayData.push(
-          {title:'Price range', value:this.sectionData[0]['price']}
-        )
-        
+
+      // Did this bcoz when the details section is being displayed and the user presses sumbit button then we have to close
+      // box and reset the displaydata and reviews array
+      if (this.reviewParams==undefined && this.searchDetailParams ==undefined) {
+        this.displayData = [];
+        this.displayDataReviews = [];
+        this.showDetailsSection = false;
       }
-      if (this.sectionData[0]['is_open_now']!='noStatus'){
-        if (this.sectionData[0]['is_open_now']){
-          this.displayData.push(
-            {title:'Status', value: 'Open'}
-          )
-        }
-        else {
-          this.displayData.push(
-            {title:'Status', value: 'Closed'}
-          )
-        }
-        
-      }
-    
-      // Google Maps Integration
-    this.mapOptions = {
-        center: { 
-          lat: this.sectionData[0]['coordinates']['latitude'], 
-          lng: this.sectionData[0]['coordinates']['longitude'] 
-        },
-        zoom : 14
-     }
-    this.marker = {
-        position: { 
-          lat: this.sectionData[0]['coordinates']['latitude'], 
-          lng: this.sectionData[0]['coordinates']['longitude'] 
-        },
-     }
 
-    //  To hide or show reservation button
-     if (localStorage.getItem(this.sectionData[0]['name'])==null){
-      this.showSubmitRes = true;
-     }
-     else{
-      this.showSubmitRes = false;
-     }
-
-    }
-
-    if (this.reviewParams!=undefined && this.searchDetailParams!= undefined){
-      this.reviewData = this.reviewParams['response'] // Reviews might be empty
-      this.displayDataReviews.push(this.reviewData)
-      // console.log(this.displayDataReviews, 'reviews');
-    }
-
-    // Did this bcoz when the details section is being displayed and the user presses sumbit button then we have to close
-    // box and reset the displaydata and reviews array
-    if (this.reviewParams==undefined && this.searchDetailParams ==undefined) {
-      this.displayData = [];
-      this.displayDataReviews = [];
-      this.showDetailsSection = false;
     }
 
     
