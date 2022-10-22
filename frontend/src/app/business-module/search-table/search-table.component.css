@@ -1,60 +1,42 @@
 
 .busiSearch {
     /* width: 75%; */
-    width: 1000px;
-    color: black;
-}
-.busiSearch table{
     width: 100%;
-    text-align: center;
+    color: black;
     background-color: white;
-    border-spacing: 0px;
+    border: 1px solid lightgray;
+    border-radius: 12px;
 }
-.busiSearch table th{
-    /* width: 100%; */
+
+.busiSearch table{
     text-align: center;
-    background-color: #4562A2;
-    border-right: 1px solid lightgray;
+}
+.busiSearch table tbody td{
+    position: relative;
 }
 
-/* .busiSearch table th a {
-    display: block;
-    cursor: pointer;
-    line-height: 50px;
-} */
+.busiSearch table tbody tr:nth-child(odd){
+    background-color: #F3F2F3;
+}
 
-.busiSearch table td a {
+.busiSearch table tbody td:nth-of-type(2) a{
+    cursor: pointer;
     text-decoration: none;
     color: black;
-    display: block;
 }
-.busiSearch table td a:hover {
-    color: gray;
+
+.busiSearch table tbody td:nth-of-type(1) a,
+.busiSearch table tbody td:nth-of-type(3) a,
+.busiSearch table tbody td:nth-of-type(4) a,
+.busiSearch table tbody td:nth-of-type(5) a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
     cursor: pointer;
-}
-.busiSearch table td {
-    border-right: 1px solid lightgray;
-    border-bottom: 1px solid lightgray;
-    padding: 3px 3px 0px 3px;
-}
-
-/* right most column of the table */
-.busiSearch table td:last-child {
-    border-right: none;
-}
-
-/* Last row of table */
-.busiSearch table tr:last-child td {
-    border-bottom: none;
-}
-
-.busiSearch table tr:first-child {
-    height: 50px;
-}
-
-.busiSearch table tr {
-    border-bottom: 1px solid black;
-    height: 106px;
+    text-decoration: none;
+    color: black;
 }
 
 .busiSearch img {

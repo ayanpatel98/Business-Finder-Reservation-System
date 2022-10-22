@@ -1,7 +1,7 @@
 <div class="container">
     <ul class="nav justify-content-end">
-        <li class="nav-item">
-          <a class="nav-link active" style="cursor: pointer;" (click)="showSearch()">Search</a>
+        <li class="nav-item active">
+          <a class="nav-link" style="cursor: pointer;" (click)="showSearch()">Search</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" style="cursor: pointer;" (click)="showBookings()">My Bookings</a>
@@ -11,6 +11,7 @@
     <!-- Main search and details section -->
     <div *ngIf="showSearchComp">
         <div class="row">
+            <div class="col-sm-3"></div>
             <div class="col-sm-6 mt-5">
                 <form class="row g-3 p-2 searchBox" [formGroup]="searchForm" (submit)="submit()" [noValidate]="false">
                     <div class="centerAlign">
@@ -65,14 +66,17 @@
                     </div>
                 </form>
             </div>
+            <div class="col-sm-3"></div>
         </div>
     
         <div class="row mt-5">
+            <div class="col-sm-2"></div>
             <div class="col-sm-8">
                 <app-search-table 
                 [searchBoxParams]="searchParams"
                 [resetSection]="resetSection"></app-search-table>
             </div>
+            <div class="col-sm-2"></div>
         </div>
     </div>
     
@@ -94,14 +98,14 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of loc_keys">
-                        <td></td>
-                        <td>{{localStore[item]['name']}}</td>
-                        <td>{{localStore[item]['resDate']}}</td>
-                        <td>{{localStore[item]['hrs']}}:{{localStore[item]['min']}}</td>
-                        <td>{{localStore[item]['email']}}</td>
+                      <tr *ngFor="let item of bookTableValues">
+                        <td>{{item['srNo']}}</td>
+                        <td>{{localStore[item['locStr_keys']]['name']}}</td>
+                        <td>{{localStore[item['locStr_keys']]['resDate']}}</td>
+                        <td>{{localStore[item['locStr_keys']]['hrs']}}:{{localStore[item['locStr_keys']]['min']}}</td>
+                        <td>{{localStore[item['locStr_keys']]['email']}}</td>
                         <td>
-                            <a (click)="delete(item)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            <a (click)="delete(item['locStr_keys'])"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </td>
                       </tr>
                     </tbody>

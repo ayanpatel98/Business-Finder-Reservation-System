@@ -7,6 +7,7 @@ import { __values } from 'tslib';
 import { submitParams } from '../model';
 import { SearchService } from '../search.service';
 
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -29,6 +30,7 @@ export class SearchComponent implements OnInit {
   searchParams:submitParams;
   localStore:Object | any;
   loc_keys:any[];
+  bookTableValues:any;
   searchForm: FormGroup;
   keywordCtrl: FormControl = new FormControl();
 
@@ -151,10 +153,31 @@ export class SearchComponent implements OnInit {
   }
 
   showSearch(){
+    // $('.nav-item').removeClass('active');
+    //   if($(this).hasClass('active')){
+    //      $(this).removeClass('active');
+    //   }else{
+    //      $(this).addClass('active');
+    //   }
+    $( '.nav a' ).on( 'click', function () {
+      $( '.nav' ).find( 'li.active' ).removeClass( 'active' );
+      $( this ).parent( 'li' ).addClass( 'active' );
+    });
+
     this.showSearchComp = true;
     this.showBookingsComp = false;
   }
   showBookings(){
+    // $('.nav-item').removeClass('active');
+    //   if($(this).hasClass('active')){
+    //      $(this).removeClass('active');
+    //   }else{
+    //      $(this).addClass('active');
+    //   }
+    $( '.nav a' ).on( 'click', function () {
+      $( '.nav' ).find( 'li.active' ).removeClass( 'active' );
+      $( this ).parent( 'li' ).addClass( 'active' );
+    });
     
     this.resetAllSections();
     this.reservationTable();
@@ -191,7 +214,17 @@ export class SearchComponent implements OnInit {
       // {'key':{'val1':values, 'val2':value}}
       Object.keys(localStorage).forEach(key=>this.localStore[key] = JSON.parse(localStorage[key]))
       this.loc_keys = Object.keys(this.localStore);
-      // console.log(this.loc_keys.length);
+
+      // Logic added for SrNo
+      this.bookTableValues =[]
+      let i=1;
+      this.loc_keys.forEach(element=>{
+        this.bookTableValues.push({
+          'locStr_keys': element,
+          'srNo': i
+        })
+        i+=1
+      })
       
     }
     // console.log(this.localStore);
@@ -202,12 +235,28 @@ export class SearchComponent implements OnInit {
     localStorage.removeItem(key);
     alert('Reservation cancelled.')
     delete this.localStore[key];
+
+    // Refresh the keys again
     this.loc_keys = Object.keys(this.localStore);
+    
+    // Logic added for SrNo
+    this.bookTableValues =[]
+    let i=1;
+    this.loc_keys.forEach(element=>{
+      this.bookTableValues.push({
+        'locStr_keys': element,
+        'srNo': i
+      })
+      i+=1
+    })
     
   }
 
   resetAllSections() {
     this.resetSection = true;
   }
+
+
+
 
 }
