@@ -1,59 +1,73 @@
 
-<div class="busiSearch" *ngIf="!resetSec">
-    <table class="table" *ngIf="showMainTable">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Image</th>
-                <th scope="col">Business Name</th>
-                <th scope="col">Rating</th>
-                <th scope="col">Distance (Miles)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let cell of tableData">
-                <td>
-                    <a class="p-2" (click)="businessDetails(cell['id'])">
-                        <b>{{cell['idx']}}</b>
-                    </a>
-                </td>
-                <td>
-                    <a (click)="businessDetails(cell['id'])">
-                        <img src="{{cell['image_url']}}" alt="{{cell['name']}}">
-                    </a>
-                </td>
-                <td>
-                    <a class="p-2" (click)="businessDetails(cell['id'])">
-                        {{cell['name']}}
-                    </a>
-                </td>
-                <td>
-                    <a class="p-2" (click)="businessDetails(cell['id'])">
-                        {{cell['rating']}}
-                    </a>
-                </td>
-                <td>
-                    <a class="p-2" (click)="businessDetails(cell['id'])">
-                        {{(cell['distance'])/1609 | number:'1.2-2'}}
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-      </table>
-
-    <div *ngIf="this.searchBoxParams!= undefined && this.searchBoxParams['response'].length==0">
-        <div style="background-color: white;">
-            Records not Found
-        </div>
+<div *ngIf="!resetSec && this.searchBoxParams!= undefined && this.searchBoxParams['response'].length>0">
+    <div class="busiSearch"  *ngIf="showMainTable">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Business Name</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Distance (Miles)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cell of tableData">
+                    <td>
+                        <a class="p-2" (click)="businessDetails(cell['id'])">
+                            <b>{{cell['idx']}}</b>
+                        </a>
+                    </td>
+                    <td>
+                        <a (click)="businessDetails(cell['id'])">
+                            <img src="{{cell['image_url']}}" alt="{{cell['name']}}">
+                        </a>
+                    </td>
+                    <td>
+                        <a class="p-2" (click)="businessDetails(cell['id'])">
+                            {{cell['name']}}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="p-2" (click)="businessDetails(cell['id'])">
+                            {{cell['rating']}}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="p-2" (click)="businessDetails(cell['id'])">
+                            {{(cell['distance'])/1609 | number:'1.2-2'}}
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
     </div>
 </div>
 
-<div class="mt-5">
-    <app-search-details id="detailBox"  
-    [searchDetailParams]="searchDetailParams" 
-    [reviewParams]="reviewParams"
-    (goBackEvent)="showTable($event)"
-    [resetSectionLast]="resetSec">
+<div *ngIf="!resetSec && this.searchBoxParams!= undefined && this.searchBoxParams['response'].length==0">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 noResult">
+            <div class= "centerAlign m-1">
+                No results available
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
 
-    </app-search-details>
+<div class="mt-5 mb-5">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <app-search-details id="detailBox"  
+            [searchDetailParams]="searchDetailParams" 
+            [reviewParams]="reviewParams"
+            (goBackEvent)="showTable($event)"
+            [resetSectionLast]="resetSec">
+        
+            </app-search-details>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
 </div>

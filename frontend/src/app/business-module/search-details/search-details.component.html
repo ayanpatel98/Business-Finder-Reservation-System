@@ -1,18 +1,21 @@
 
-<div class="businessContentDetail" id="businessContentDetail" *ngIf="showDetailsSection && !resetSecLast" style="background-color: white;">
+<div class="businessContentDetail" id="businessContentDetail" *ngIf="showDetailsSection && !resetSecLast">
     <div class="busiDetail">
-        <button (click)="goBack()">Back</button>
+        <!-- <button (click)="goBack()">Back</button> -->
+        <a (click)="goBack()" class="m-2">
+          <i class="bi bi-arrow-left" style="font-size: 24px; cursor: pointer; color: black;"></i>
+        </a>
         <br>
-        <div class="centerAlign">{{sectionData[0]['name']}}</div>
+        <div class="centerAlign"><h1>{{sectionData[0]['name']}}</h1></div>
         <mat-tab-group (selectedTabChange)="showTabSection()">
             <mat-tab label="Business Details" > 
-                <div class="row">
+                <div class="row w-100">
                     <div class="col-sm-6 p-3 centerAlign" *ngFor="let data of displayData">
-                        <h3>{{data.title}}</h3>
+                        <div><b>{{data.title}}</b></div>
                         <div>{{data.value}}</div>
                     </div>
                     <div class="col-sm-6 p-3 centerAlign">
-                        <h3>Visit yelp for more</h3>
+                        <div><b>Visit yelp for more</b></div>
                         <div>
                             <a href="{{sectionData[0]['more_info']}}" target="_blank">Business Link</a>
                         </div>
@@ -41,13 +44,13 @@
                       </a>
                     </div>
 
-                    <div class="col-sm-12" *ngIf="sectionData[0]['photos'].length>=1">
+                    <div class="col-sm-12 mt-3 mb-3 carouselStyle" *ngIf="sectionData[0]['photos'].length>=1">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                             <div *ngIf="sectionData[0]['photos'].length==1; then thenBlock else elseBlock"></div>
                             <ng-template #thenBlock>
                                 <div class="carousel-item active">
-                                  <img src="{{sectionData[0]['photos'][0]}}" class="d-block w-50" style="margin: 0 auto;" alt="...">
+                                  <img src="{{sectionData[0]['photos'][0]}}" class="d-block" alt="...">
                                 </div>
                             </ng-template>
 
@@ -56,24 +59,15 @@
                                 <img src="{{photo}}" class="d-block w-100 h-100" alt="...">
                               </div> -->
                               <div class="carousel-item active">
-                                <img src="{{sectionData[0]['photos'][0]}}" class="d-block w-50" style="margin: 0 auto;" alt="...">
+                                <img src="{{sectionData[0]['photos'][0]}}" class="d-block" alt="...">
                               </div>
                               <div class="carousel-item">
-                                <img src="{{sectionData[0]['photos'][1]}}" class="d-block w-50" style="margin: 0 auto;" alt="...">
+                                <img src="{{sectionData[0]['photos'][1]}}" class="d-block" alt="...">
                               </div>
                               <div class="carousel-item" *ngIf="sectionData[0]['photos'].length>=3">
-                                <img src="{{sectionData[0]['photos'][2]}}" class="d-block w-50" style="margin: 0 auto;" alt="...">
+                                <img src="{{sectionData[0]['photos'][2]}}" class="d-block" alt="...">
                               </div>
                             </ng-template>
-                              <!-- <div class="carousel-item active">
-                                <img src="..." class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item">
-                                <img src="..." class="d-block w-100" alt="...">
-                              </div>
-                              <div class="carousel-item">
-                                <img src="..." class="d-block w-100" alt="...">
-                              </div> -->
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -85,17 +79,17 @@
                             </button>
                           </div>
                     </div>
-                    <div class="col-sm-12" *ngIf="sectionData[0]['photos'].length==0">
+                    <div class="col-sm-12 mt-3 carouselStyle" *ngIf="sectionData[0]['photos'].length==0">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                               <div class="carousel-item active">
-                                <img src="" class="d-block w-100" alt="No Photo">
+                                <img src="" class="d-block" alt="No Photo">
                               </div>
                               <div class="carousel-item">
-                                <img src="" class="d-block w-100" alt="No Photo">
+                                <img src="" class="d-block" alt="No Photo">
                               </div>
                               <div class="carousel-item">
-                                <img src="" class="d-block w-100" alt="No Photo">
+                                <img src="" class="d-block" alt="No Photo">
                               </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -111,7 +105,7 @@
                 </div>
             </mat-tab>
             <mat-tab label="Map Location">
-              <div class="row pt-3 pb-3">
+              <div class="row pt-3 pb-3 w-100">
                 <div class="col-sm-12">
                   <google-map [options]="mapOptions">
                     <map-marker [position]="marker.position"></map-marker>
@@ -120,8 +114,8 @@
               </div>
             </mat-tab>
             <mat-tab label="Reviews">
-              <div class="row">
-                <div class="col-sm-12" *ngFor="let data of displayDataReviews[0]">
+              <div class="row w-100">
+                <div class="col-sm-12 reviewDiv" *ngFor="let data of displayDataReviews[0]">
                   <span><b>{{data['name']}}</b></span>
                   <br>
                   <span>{{data['rating']}}</span>

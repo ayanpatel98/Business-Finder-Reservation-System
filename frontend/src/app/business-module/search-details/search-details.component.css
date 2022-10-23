@@ -1,0 +1,21 @@
+.businessContentDetail {
+    background-color: white;
+    border-radius: 12px;
+}
+
+.reviewDiv:nth-of-type(odd){
+    background-color: #F3F2F3;
+}
+
+.carouselStyle  img{
+    max-width: 300px;
+    max-height: 300px;
+    margin: 0 auto;
+}
+
+.closed{
+    color: red;
+}
+.open {
+    color: green;
+}
