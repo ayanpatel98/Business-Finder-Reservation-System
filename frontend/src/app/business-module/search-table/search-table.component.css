@@ -10,6 +10,7 @@
 
 .busiSearch table{
     text-align: center;
+    margin-bottom: -1px;
 }
 .busiSearch table tbody td{
     position: relative;
@@ -23,6 +24,7 @@
     cursor: pointer;
     text-decoration: none;
     color: black;
+    display: block;
 }
 
 .busiSearch table tbody td:nth-of-type(1) a,

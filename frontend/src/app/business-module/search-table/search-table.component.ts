@@ -68,8 +68,8 @@ export class SearchTableComponent implements OnInit, OnChanges {
         this.searchDetailParams = res;
         this.resetSec = false;
         // Go to the Details section
-        let element: any = document.getElementById('detailBox')
-        element.scrollIntoView();
+        let element: any = document.querySelector('#detailBox')
+        element.scrollIntoView({ behavior: 'instant'});
       }
     });
 

@@ -7,6 +7,10 @@
     background-color: #F3F2F3;
 }
 
+.reviewDiv{
+    margin-left:12px;
+}
+
 .carouselStyle  img{
     max-width: 300px;
     max-height: 300px;
