@@ -4,7 +4,7 @@ import { BusinessModuleModule } from './business-module/business-module.module';
 
 const routes: Routes = [
   {
-    path: 'business',
+    path: '',
     loadChildren: () => BusinessModuleModule
   },
 ];
