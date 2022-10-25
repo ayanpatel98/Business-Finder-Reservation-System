@@ -33,8 +33,10 @@ router.get('/', cors(), (req, res) => {
 
     axios.get(base_url+'businesses/search', config)
         .then(function (response) {
-
-            response.data.businesses.forEach(element => {
+            let i=0;
+            response.data.businesses.every(element => {
+                if (i==10) return false
+                i++;
                 business_obj.push({
                     'id': element['id'],
                     'image_url': element['image_url'],
@@ -43,6 +45,7 @@ router.get('/', cors(), (req, res) => {
                     'rating': element['rating'],
                     'distance': element['distance']
                 })
+                return true
             });
             
             res.json({'status' : response.status, 'response' : business_obj});

@@ -33,8 +33,8 @@
                     <td>{{localStore[item['locStr_keys']]['resDate']}}</td>
                     <td>{{localStore[item['locStr_keys']]['hrs']}}:{{localStore[item['locStr_keys']]['min']}}</td>
                     <td>{{localStore[item['locStr_keys']]['email']}}</td>
-                    <td  style="cursor: pointer;">
-                        <a (click)="delete(item['locStr_keys'])">
+                    <td  style="cursor: pointer;"  (click)="delete(item['locStr_keys'])">
+                        <a>
                           <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </a>
                     </td>
