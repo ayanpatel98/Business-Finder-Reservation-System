@@ -12,13 +12,15 @@ import { SearchDetailsComponent } from './search-details/search-details.componen
 import { GoogleMapsModule } from '@angular/google-maps'
 import * as $ from 'jquery';
 import * as bootstrap from "bootstrap";
+import { BookingsComponent } from './bookings/bookings.component';
 
 
 @NgModule({
   declarations: [
     SearchComponent,
     SearchTableComponent,
-    SearchDetailsComponent
+    SearchDetailsComponent,
+    BookingsComponent
   ],
   imports: [
     CommonModule,

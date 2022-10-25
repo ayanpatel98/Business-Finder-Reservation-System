@@ -1,17 +1,13 @@
-.searchBox {
-    background-color: white;
-    border: 1px solid lightgray;
-    border-radius: 12px;
-}
 
-.searchStyle {
+.bookingStyle {
     cursor: pointer;
     color: black;
     border: 1px solid black;
     border-radius: 15px;
 }
-.bookingStyle {
+
+.searchStyle {
     cursor: pointer;
     color: black;
-
 }
+

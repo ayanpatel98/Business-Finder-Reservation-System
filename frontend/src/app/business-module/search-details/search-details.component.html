@@ -7,16 +7,25 @@
         </a>
         <br>
         <div class="centerAlign"><h1>{{sectionData[0]['name']}}</h1></div>
-        <mat-tab-group (selectedTabChange)="showTabSection()">
+        <mat-tab-group mat-align-tabs="center" (selectedTabChange)="showTabSection()">
             <mat-tab label="Business Details" > 
-                <div class="row w-100">
+                <div class="row w-100 mt-2" style="margin-left: 0px;">
                     <div class="col-sm-6 p-3 centerAlign" *ngFor="let data of displayData">
                         <div><b>{{data.title}}</b></div>
-                        <div>{{data.value}}</div>
+                        <div class="mt-2" >{{data.value}}</div>
+                    </div>
+                    <div class="col-sm-6 p-3 centerAlign" *ngIf="sectionData[0]['is_open_now']!='noStatus'">
+                        <div><b>Status</b></div>
+                        <div class="mt-2" [ngClass]="statusClass" *ngIf="sectionData[0]['is_open_now']==true">
+                          Open
+                        </div>
+                        <div class="mt-2" [ngClass]="statusClass" *ngIf="sectionData[0]['is_open_now']==false">
+                          Closed
+                        </div>
                     </div>
                     <div class="col-sm-6 p-3 centerAlign">
                         <div><b>Visit yelp for more</b></div>
-                        <div>
+                        <div class="mt-2" >
                             <a href="{{sectionData[0]['more_info']}}" target="_blank">Business Link</a>
                         </div>
                     </div>
@@ -105,17 +114,18 @@
                 </div>
             </mat-tab>
             <mat-tab label="Map Location">
-              <div class="row pt-3 pb-3 w-100">
-                <div class="col-sm-12">
-                  <google-map [options]="mapOptions">
-                    <map-marker [position]="marker.position"></map-marker>
-                  </google-map>
-                </div>
-              </div>
+              <!-- <div class="row pt-3 pb-3 w-100">
+                <div class="col-sm-12"> -->
+                      <div class="mt-3 mb-3">
+                        <google-map width="100%" [options]="mapOptions">
+                          <map-marker [position]="marker.position"></map-marker>
+                        </google-map>
+                      </div>
+                <!-- </div>
+              </div> -->
             </mat-tab>
             <mat-tab label="Reviews">
-              <div class="row w-100 mb-2">
-                <div class="col-sm-12 pt-2 pb-2 reviewDiv" *ngFor="let data of displayDataReviews[0]">
+                <div class="pt-2 pb-2 px-2 reviewDiv" *ngFor="let data of displayDataReviews[0]">
                   <span><b>{{data['name']}}</b></span>
                   <br>
                   <span>{{data['rating']}}</span>
@@ -124,7 +134,6 @@
                   <br><br>
                   <span>{{data['time_created']}}</span>
                 </div>
-              </div>
             </mat-tab>
         </mat-tab-group>
           

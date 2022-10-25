@@ -15,14 +15,12 @@ import { SearchService } from '../search.service';
   providers: [SearchService]
 })
 export class SearchComponent implements OnInit {
-  showSearchComp: boolean = true;
-  showBookingsComp: boolean = false;
   isLoading = false;
   isLocationValid: boolean = false;
   // When the clear button is pressed
   resetSection:boolean = false;
   errorMsg!: string;
-  minLengthTerm = 3;
+  minLengthTerm = 1;
   filteredKeywords :any;
   selectedMovie: any = "";
   latitude: any = '';
@@ -78,8 +76,6 @@ export class SearchComponent implements OnInit {
         }
         console.log(this.filteredKeywords, this.keywordCtrl.value);
       });
-
-    this.reservationTable();
     
   }
   
@@ -150,106 +146,6 @@ export class SearchComponent implements OnInit {
         }
       });
     }
-  }
-
-  showSearch(){
-    // $('.nav-item').removeClass('active');
-    //   if($(this).hasClass('active')){
-    //      $(this).removeClass('active');
-    //   }else{
-    //      $(this).addClass('active');
-    //   }
-    $( '.nav a' ).on( 'click', function () {
-      $( '.nav' ).find( 'li.active' ).removeClass( 'active' );
-      $( this ).parent( 'li' ).addClass( 'active' );
-    });
-
-    this.showSearchComp = true;
-    this.showBookingsComp = false;
-  }
-  showBookings(){
-    // $('.nav-item').removeClass('active');
-    //   if($(this).hasClass('active')){
-    //      $(this).removeClass('active');
-    //   }else{
-    //      $(this).addClass('active');
-    //   }
-    $( '.nav a' ).on( 'click', function () {
-      $( '.nav' ).find( 'li.active' ).removeClass( 'active' );
-      $( this ).parent( 'li' ).addClass( 'active' );
-    });
-    
-    this.resetAllSections();
-    this.reservationTable();
-    this.showSearchComp = false;
-    this.showBookingsComp = true;
-    this.searchForm.reset();
-    this.searchForm.controls['location'].enable();
-    this.keywordCtrl.reset();
-    this.searchForm.controls['category'].patchValue('All')
-    // console.log(this.searchForm.controls['keyword'].value);
-    this.addSrNo();
-    
-  }
-
-  // Function to enter serial number
-  addSrNo() {
-    console.log('loaded');
-    
-    // if(document.getElementById('reserveStorageTable')!=null){
-    //   let table = document.getElementById('reserveStorageTable')  as HTMLTableElement;
-    //   let row_len = table?.rows.length;
-
-    //   for (let i = 1; i<row_len;i++){
-    //     table.rows[i].cells[0].innerHTML = String(i);
-    //   }
-    // }
-
-  }
-
-  reservationTable(){
-    if (localStorage!=null){
-      this.localStore={}
-      
-      // {'key':{'val1':values, 'val2':value}}
-      Object.keys(localStorage).forEach(key=>this.localStore[key] = JSON.parse(localStorage[key]))
-      this.loc_keys = Object.keys(this.localStore);
-
-      // Logic added for SrNo
-      this.bookTableValues =[]
-      let i=1;
-      this.loc_keys.forEach(element=>{
-        this.bookTableValues.push({
-          'locStr_keys': element,
-          'srNo': i
-        })
-        i+=1
-      })
-      
-    }
-    // console.log(this.localStore);
-  }
-
-  delete(key:any){
-    // console.log(key);
-    localStorage.removeItem(key);
-    alert('Reservation cancelled.')
-    delete this.localStore[key];
-
-    // Refresh the keys again
-    this.loc_keys = Object.keys(this.localStore);
-    
-    // Logic added for SrNo
-    this.bookTableValues =[]
-    let i=1;
-    this.loc_keys.forEach(element=>{
-      this.bookTableValues.push({
-        'locStr_keys': element,
-        'srNo': i
-      })
-      i+=1
-    })
-    
   }
 
   resetAllSections() {

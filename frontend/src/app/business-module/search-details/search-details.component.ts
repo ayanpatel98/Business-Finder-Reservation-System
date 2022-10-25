@@ -22,6 +22,7 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
   mapOptions : google.maps.MapOptions;
   marker : any;
   showSubmitRes:boolean;
+  statusClass:any;
 
   // When the clear button is pressed
   @Input() resetSectionLast: any;
@@ -78,40 +79,37 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
         }
         if (this.sectionData[0]['is_open_now']!='noStatus'){
           if (this.sectionData[0]['is_open_now']){
-            this.displayData.push(
-              {title:'Status', value: 'Open'}
-            )
+            this.statusClass = 'open'
           }
           else {
-            this.displayData.push(
-              {title:'Status', value: 'Closed'}
-            )
+            this.statusClass = 'closed'
           }
           
         }
       
         // Google Maps Integration
-      this.mapOptions = {
-          center: { 
-            lat: this.sectionData[0]['coordinates']['latitude'], 
-            lng: this.sectionData[0]['coordinates']['longitude'] 
-          },
-          zoom : 14
-      }
-      this.marker = {
-          position: { 
-            lat: this.sectionData[0]['coordinates']['latitude'], 
-            lng: this.sectionData[0]['coordinates']['longitude'] 
-          },
-      }
+        this.mapOptions = {
+            center: { 
+              lat: this.sectionData[0]['coordinates']['latitude'], 
+              lng: this.sectionData[0]['coordinates']['longitude'] 
+            },
+            zoom : 14
+        }
+        this.marker = {
+            position: { 
+              lat: this.sectionData[0]['coordinates']['latitude'], 
+              lng: this.sectionData[0]['coordinates']['longitude'] 
+            },
+        }
 
-      //  To hide or show reservation button
-      if (localStorage.getItem(this.sectionData[0]['name'])==null){
-        this.showSubmitRes = true;
-      }
-      else{
-        this.showSubmitRes = false;
-      }
+        //  To hide or show reservation button
+        if (localStorage.getItem(this.sectionData[0]['name'])==null){
+          this.showSubmitRes = true;
+        }
+        else{
+          this.showSubmitRes = false;
+        }
+        
 
       }
 
@@ -128,7 +126,6 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
         this.displayDataReviews = [];
         this.showDetailsSection = false;
       }
-
     }
 
     

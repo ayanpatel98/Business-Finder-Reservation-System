@@ -3,13 +3,18 @@
     border-radius: 12px;
 }
 
+/* .my-google-map .map-container{
+    width: 100% !important;
+    height: 100% !important;
+} */
+
 .reviewDiv:nth-of-type(odd){
     background-color: #F3F2F3;
 }
-
-.reviewDiv{
-    margin-left:12px;
+.reviewDiv:last-of-type{
+    border-radius: 0px 0px 12px 12px;
 }
+
 
 .carouselStyle  img{
     max-width: 300px;
