@@ -11,3 +11,21 @@
     color: black;
 }
 
+table{
+    background: white;
+    border-radius: 12px;
+}
+
+.noResult {
+    background-color: white;
+    /* border: 1px solid lightgray; */
+    color: red;
+    border-radius: 12px;
+}
+
+@media (max-width: 580px) {
+    .tableDivParent {
+        overflow-x: scroll;
+    }
+}
+

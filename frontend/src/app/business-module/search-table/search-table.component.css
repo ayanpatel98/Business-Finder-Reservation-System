@@ -52,3 +52,11 @@
     color: red;
     border-radius: 12px;
 }
+
+
+@media (max-width: 575px) {
+    .busiSearch img {
+        height: 80px;
+        width: 80px;
+    }
+}

@@ -2,11 +2,11 @@
 
 html, body { height: 100%; }
 body {
-    background: url(./assets/city.jpg), linear-gradient(to left top, rgba(230,234,253,1) 0%, rgba(136,151,211,1) 100%);
-    /* background-size: 150%; */
+    background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(136,151,211,0.65)),
+                    url(./assets/city.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
-    /* background-position: 59% 100%; */
+    background-position: 59% 100%;
 }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
