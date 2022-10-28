@@ -148,12 +148,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Reservation Form</h5>
+        <div class="modal-title" id="exampleModalLabel" style="font-size: 22px;">Reservation Form</div>
         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
 
       <div class="modal-body">
-        <div class="centerAlign">{{sectionData[0]['name']}}</div>
+        <div class="centerAlign" style="font-size: 20px;">{{sectionData[0]['name']}}</div>
         <form #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit(userForm)">
           <div class="form-group row">
             <div class="col-sm-12">
@@ -167,20 +167,20 @@
               </div>
             </div>
 
-            <div class="col-sm-12">
-              <label>Date</label>
-              <input type="date" name="resDate" class="form-control" [(ngModel)]="model.resDate" #resDate="ngModel"
+              <div class="col-sm-12">
+                <label>Date</label>
+                <input type="date" name="resDate" class="form-control" [(ngModel)]="model.resDate" #resDate="ngModel"
                 placeholder="mm/dd/yyyy" 
                 [min]="todayDate"
                 [ngClass]="{ 'is-invalid': userForm.submitted && resDate.invalid }" required>
-              <div class="invalid-feedback" *ngIf="userForm.submitted && resDate.invalid">
-                <p *ngIf="resDate.errors">Date is required</p>
+                <div class="invalid-feedback" *ngIf="userForm.submitted && resDate.invalid">
+                  <p *ngIf="resDate.errors">Date is required</p>
+                </div>
               </div>
-            </div>
 
             <label>Time</label>
-            <div class="col-sm-3">
-              <select class="form-select"
+            <div class="col-sm-3" style="width: 122.6px;">
+              <select class="form-select" style="width: 98.6px;"
               [(ngModel)]="model.hrs" #hrs="ngModel" name="hrs" class="form-control"
               [ngClass]="{ 'is-invalid': userForm.submitted && hrs.invalid }"
               required>
@@ -194,9 +194,10 @@
                 <option value="17">17</option>
               </select>
             </div>
-            :
-            <div class="col-sm-3">
-              <select class="form-select"
+            
+            <div class="col-sm-3" style="width: 135.6px;">
+              <div style="display: inline-block;">:&nbsp;&nbsp;</div>
+              <select class="form-select" style="width: 98.6px; display: inline-block;"
               [(ngModel)]="model.min" #min="ngModel" name="min" class="form-control"
               [ngClass]="{ 'is-invalid': userForm.submitted && min.invalid }"
               required>
@@ -206,10 +207,12 @@
                 <option value="45">45</option>
               </select>
             </div>
-            <div class="col-sm-3" style="float: left;"><i class="bi bi-clock"></i></div>
+            <div class="col-sm-3" style="float: left; height: 37.6px; line-height: 37.6px; width: 10%;">
+              <i class="bi bi-clock"></i>
+            </div>
 
-            <div class="col-sm-12 mt-3">
-              <button class="btn btn-danger" type="submit" style="margin: 0 auto;">Submit form</button>
+            <div class="col-sm-12 mt-3 centerAlign">
+              <button class="btn btn-danger" type="submit">Submit</button>
             </div>
             
           </div>
@@ -217,7 +220,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
