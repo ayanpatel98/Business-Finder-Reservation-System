@@ -54,6 +54,7 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
         this.showDetailsSection = true;
         this.sectionData = this.searchDetailParams['response'];
         
+        
         if (this.sectionData[0]['display_address']!=[] || this.sectionData[0]['display_address']!='') {
           this.displayData.push(
             {title:'Address', value:this.sectionData[0]['display_address']}
@@ -103,7 +104,7 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
         }
 
         //  To hide or show reservation button
-        if (localStorage.getItem(this.sectionData[0]['name'])==null){
+        if (localStorage.getItem(this.sectionData[0]['id'])==null){
           this.showSubmitRes = true;
         }
         else{
@@ -138,13 +139,14 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
       // Store
         let a:Object;
         a = {
+            'id' : this.sectionData[0]['id'],
             'name': this.sectionData[0]['name'],
             'email': form.form.value.email,
             'resDate': form.form.value.resDate,
             'hrs': form.form.value.hrs,
             'min': form.form.value.min,
           }  
-        localStorage.setItem(this.sectionData[0]['name'], JSON.stringify(a));
+        localStorage.setItem(this.sectionData[0]['id'], JSON.stringify(a));
         alert('Reservation Created!');
         
         // Close the Modal box
