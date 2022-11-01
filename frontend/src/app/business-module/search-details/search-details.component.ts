@@ -94,7 +94,7 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
               lat: this.sectionData[0]['coordinates']['latitude'], 
               lng: this.sectionData[0]['coordinates']['longitude'] 
             },
-            zoom : 14
+            zoom : 13.75
         }
         this.marker = {
             position: { 

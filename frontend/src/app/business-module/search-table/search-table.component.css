@@ -27,6 +27,10 @@
     display: block;
 }
 
+.busiSearch table tbody td:nth-of-type(1) {
+    height: 117px;
+}
+
 .busiSearch table tbody td:nth-of-type(1) a,
 .busiSearch table tbody td:nth-of-type(3) a,
 .busiSearch table tbody td:nth-of-type(4) a,
@@ -58,5 +62,8 @@
     .busiSearch img {
         height: 80px;
         width: 80px;
+    }
+    .busiSearch table tbody td:nth-of-type(1) {
+        height: 97px;
     }
 }

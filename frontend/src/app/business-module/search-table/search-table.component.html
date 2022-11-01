@@ -4,11 +4,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col" style="width: 7%;">#</th>
                     <th scope="col">Image</th>
-                    <th scope="col">Business Name</th>
-                    <th scope="col">Rating</th>
-                    <th scope="col">Distance (Miles)</th>
+                    <th scope="col" style="width: 41%;">Business Name</th>
+                    <th scope="col" style="width: 15%;">Rating</th>
+                    <th scope="col" style="width: 20%;">Distance (Miles)</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,8 +18,8 @@
                             <b>{{cell['idx']}}</b>
                         </a>
                     </td>
-                    <td>
-                        <a (click)="businessDetails(cell['id'])">
+                    <td (click)="businessDetails(cell['id'])" style="cursor: pointer;">
+                        <a>
                             <img src="{{cell['image_url']}}" alt="{{cell['name']}}">
                         </a>
                     </td>
