@@ -35,7 +35,8 @@
                     </td>
                     <td>
                         <a class="p-2" (click)="businessDetails(cell['id'])">
-                            {{(cell['distance'])/1609 | number:'1.2-2'}}
+                            <!-- {{(cell['distance'])/1609 | number:'1.2-2'}} -->
+                            {{(cell['distance'])/1609 | number:'1.0-0'}}
                         </a>
                     </td>
                 </tr>

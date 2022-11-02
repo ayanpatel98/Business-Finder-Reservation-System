@@ -42,8 +42,9 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
   constructor(private myserv: SearchService,) { }
 
   ngOnInit(): void {
-    this.todayDate = String(this.todayDate.getFullYear()) +'-' + String(new Date().getMonth()+1) 
-    +'-' + String(this.todayDate.getDate())
+    this.todayDate = new Date();
+    // this.todayDate = String(this.todayDate.getFullYear()) +'-' + String(new Date().getMonth()+1) 
+    // +'-' + String(this.todayDate.getDate())
   }
   
   ngOnChanges(changes: SimpleChanges) {
@@ -110,6 +111,8 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
         else{
           this.showSubmitRes = false;
         }
+        // let element: any = document.querySelector('#businessContentDetail')
+        // element.scrollIntoView({ behavior: 'instant'});
         
 
       }

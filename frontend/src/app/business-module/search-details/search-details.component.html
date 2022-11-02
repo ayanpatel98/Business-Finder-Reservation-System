@@ -17,7 +17,7 @@
                     <div class="col-sm-6 p-3 centerAlign" *ngIf="sectionData[0]['is_open_now']!='noStatus'">
                         <div><b>Status</b></div>
                         <div class="mt-2" [ngClass]="statusClass" *ngIf="sectionData[0]['is_open_now']==true">
-                          Open
+                          Open Now
                         </div>
                         <div class="mt-2" [ngClass]="statusClass" *ngIf="sectionData[0]['is_open_now']==false">
                           Closed
@@ -170,8 +170,8 @@
               <div class="col-sm-12">
                 <label>Date</label>
                 <input type="date" name="resDate" class="form-control" [(ngModel)]="model.resDate" #resDate="ngModel"
-                placeholder="mm/dd/yyyy" 
-                [min]="todayDate"
+                placeholder="mm/dd/yyyy"
+                min="{{todayDate | date :'yyyy-MM-dd'}}"
                 [ngClass]="{ 'is-invalid': userForm.submitted && resDate.invalid }" required>
                 <div class="invalid-feedback" *ngIf="userForm.submitted && resDate.invalid">
                   <p *ngIf="resDate.errors">Date is required</p>
