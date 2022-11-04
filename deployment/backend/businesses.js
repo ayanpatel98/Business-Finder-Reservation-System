@@ -1,8 +1,8 @@
 const express = require('express')
 const axios = require('axios');
 const router = express.Router()
-const base_url = require('./main.js').base_url;
-const HEADERS = require('./main.js').headers;
+const base_url = require('./server.js').base_url;
+const HEADERS = require('./server.js').headers;
 const cors = require('cors');
 
 // Business Search Details

@@ -88,6 +88,7 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
           }
           
         }
+        
       
         // Google Maps Integration
         this.mapOptions = {

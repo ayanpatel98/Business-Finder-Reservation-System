@@ -150,6 +150,7 @@ export class SearchComponent implements OnInit {
 
   resetAllSections() {
     this.resetSection = true;
+    this.filteredKeywords = [];
     this.searchForm.controls['location'].enable();
   }
 

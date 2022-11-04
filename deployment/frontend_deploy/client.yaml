@@ -2,9 +2,9 @@ runtime: nodejs16
 service: default
 handlers:
     # Serve all static files with urls ending with a file extension
-    # - url: /(.*\..+)$
-    #   static_files: dist/frontend/\1
-    #   upload: dist/frontend/(.*\..+)$
+    - url: /(.*\..+)$
+      static_files: dist/frontend/\1
+      upload: dist/frontend/(.*\..+)$
       # catch all handler to index.html
     - url: /.*
       static_files: dist/frontend/index.html

@@ -8,7 +8,7 @@ const  base_backend_api = 'http://localhost:8080'
 
 // Google maps geo location
 const  base_geo_api = 'https://maps.googleapis.com/maps/api/geocode/json'
-const  base_geo_api_key = 'AIzaSyD-WbOrXTqRYjcEjve9Tqb0igOyizb9YY8'
+const  base_geo_api_key = 'AIzaSyCxyrgZ_Jw6ZFo4vG3AAPnsAk6LHfimJS8'
 
 // IPINFO API
 const  base_geo_api_ipinfo = 'https://ipinfo.io'

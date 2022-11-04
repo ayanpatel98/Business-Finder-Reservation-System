@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 // const cors = require('cors');
-const port = 8080;
+const port = parseInt(process.env.PORT) || 8080;
 
 // Destination API URL
 const base_url = 'https://api.yelp.com/v3/'
