@@ -2,8 +2,8 @@ const express = require('express')
 const axios = require('axios');
 const { response } = require('express');
 const router = express.Router()
-const base_url = require('./main.js').base_url;
-const HEADERS = require('./main.js').headers;
+const base_url = require('./server.js').base_url;
+const HEADERS = require('./server.js').headers;
 const cors = require('cors');
 
 // const base_url = 'https://api.yelp.com/v3/'
