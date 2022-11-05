@@ -5,7 +5,7 @@ import { geoResponse, ipinfoResponse, searchTable } from './model';
 
 
 // const  base_backend_api = 'http://localhost:8080'
-const  base_backend_api = 'https://api-dot-trial-business-081998.uw.r.appspot.com'
+const  base_backend_api = 'https://api-dot-business-search-reserve-081998.uw.r.appspot.com'
 
 // Google maps geo location
 const  base_geo_api = 'https://maps.googleapis.com/maps/api/geocode/json'
