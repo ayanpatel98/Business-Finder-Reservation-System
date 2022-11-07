@@ -28,7 +28,7 @@
 }
 
 .busiSearch table tbody td:nth-of-type(1) {
-    height: 117px;
+    height: 100px;
 }
 
 .busiSearch table tbody td:nth-of-type(1) a,
@@ -55,15 +55,4 @@
     border: 1px solid lightgray;
     color: red;
     border-radius: 12px;
-}
-
-
-@media (max-width: 575px) {
-    .busiSearch img {
-        height: 80px;
-        width: 80px;
-    }
-    .busiSearch table tbody td:nth-of-type(1) {
-        height: 97px;
-    }
 }

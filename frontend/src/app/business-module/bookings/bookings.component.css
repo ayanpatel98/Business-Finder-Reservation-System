@@ -22,10 +22,3 @@ table{
     color: red;
     border-radius: 12px;
 }
-
-@media (max-width: 580px) {
-    .tableDivParent {
-        overflow-x: scroll;
-    }
-}
-
