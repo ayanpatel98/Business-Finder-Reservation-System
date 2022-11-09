@@ -160,10 +160,16 @@
               <label>Email</label>
               <input type="text" name="email" class="form-control" [(ngModel)]="model.email" #email="ngModel"
                 [ngClass]="{ 'is-invalid': userForm.submitted && email.invalid }" 
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{1,}$"
                 required>
-              <div class="invalid-feedback" *ngIf="userForm.submitted && email.invalid">
+              <div class="invalid-feedback" *ngIf="userForm.submitted && email.invalid && (email.value ==='' || email.value ===undefined)">
                 <p *ngIf="email.errors">Email is required</p>
+              </div>
+              <div *ngIf="email.invalid && email.value !=='' && (email.dirty || email.touched) && (!userForm.submitted||userForm.submitted)" 
+              style="font-size: .875em; color: #dc3545;">
+                <div *ngIf="email.errors">
+                  Email must be a valid email address
+                </div>
               </div>
             </div>
 

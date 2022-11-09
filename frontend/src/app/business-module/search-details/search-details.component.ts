@@ -23,7 +23,9 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
   marker : any;
   showSubmitRes:boolean;
   statusClass:any;
+  patternMatch = true;
 
+ 
   // When the clear button is pressed
   @Input() resetSectionLast: any;
   resetSecLast: boolean;
@@ -218,5 +220,4 @@ export class SearchDetailsComponent implements OnInit, OnChanges {
     this.displayDataReviews = [];
     this.goBackEvent.emit(true);
   }
-
 }
