@@ -1,7 +1,5 @@
 const express = require('express');
 const app = express();
-// Newly added 1 lined below
-app.use(express.static('./public/frontend'))
 // const cors = require('cors');
 const port = parseInt(process.env.PORT) || 8080;
 

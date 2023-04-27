@@ -1,0 +1,30 @@
+.businessContentDetail {
+    background-color: white;
+    border-radius: 12px;
+}
+
+/* .my-google-map .map-container{
+    width: 100% !important;
+    height: 100% !important;
+} */
+
+.reviewDiv:nth-of-type(odd){
+    background-color: #F3F2F3;
+}
+.reviewDiv:last-of-type{
+    border-radius: 0px 0px 12px 12px;
+}
+
+
+.carouselStyle  img{
+    max-width: 300px;
+    max-height: 300px;
+    margin: 0 auto;
+}
+
+.closed{
+    color: red;
+}
+.open {
+    color: green;
+}

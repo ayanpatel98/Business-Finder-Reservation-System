@@ -1,0 +1,19 @@
+.searchBox {
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 12px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.searchStyle {
+    cursor: pointer;
+    color: black;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+.bookingStyle {
+    cursor: pointer;
+    color: black;
+
+}

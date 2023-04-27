@@ -1,0 +1,58 @@
+
+.busiSearch {
+    /* width: 75%; */
+    width: 100%;
+    color: black;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 12px;
+}
+
+.busiSearch table{
+    text-align: center;
+    margin-bottom: -1px;
+}
+.busiSearch table tbody td{
+    position: relative;
+}
+
+.busiSearch table tbody tr:nth-child(odd){
+    background-color: #F3F2F3;
+}
+
+.busiSearch table tbody td:nth-of-type(2) a{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.busiSearch table tbody td:nth-of-type(1) {
+    height: 100px;
+}
+
+.busiSearch table tbody td:nth-of-type(1) a,
+.busiSearch table tbody td:nth-of-type(3) a,
+.busiSearch table tbody td:nth-of-type(4) a,
+.busiSearch table tbody td:nth-of-type(5) a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.busiSearch img {
+    height: 100px;
+    width: 100px;
+}
+
+.noResult {
+    background-color: white;
+    border: 1px solid lightgray;
+    color: red;
+    border-radius: 12px;
+}

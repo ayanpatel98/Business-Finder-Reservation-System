@@ -1,0 +1,74 @@
+
+<div *ngIf="!resetSec && this.searchBoxParams!= undefined && this.searchBoxParams['response'].length>0">
+    <div class="busiSearch"  *ngIf="showMainTable">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 7%;">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col" style="width: 41%;">Business Name</th>
+                    <th scope="col" style="width: 15%;">Rating</th>
+                    <th scope="col" style="width: 20%;">Distance (Miles)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cell of tableData">
+                    <td>
+                        <a class="p-2" (click)="businessDetails(cell['id'])">
+                            <b>{{cell['idx']}}</b>
+                        </a>
+                    </td>
+                    <td (click)="businessDetails(cell['id'])" style="cursor: pointer;">
+                        <a>
+                            <img src="{{cell['image_url']}}" alt="{{cell['name']}}" style="height: 90px; width: 90px;">
+                        </a>
+                    </td>
+                    <td>
+                        <a class="p-2" (click)="businessDetails(cell['id'])">
+                            {{cell['name']}}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="p-2" (click)="businessDetails(cell['id'])">
+                            {{cell['rating']}}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="p-2" (click)="businessDetails(cell['id'])">
+                            <!-- {{(cell['distance'])/1609 | number:'1.2-2'}} -->
+                            {{(cell['distance'])/1609 | number:'1.0-0'}}
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+
+<div *ngIf="!resetSec && this.searchBoxParams!= undefined && this.searchBoxParams['response'].length==0">
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-sm-0 col-md-2 col-lg-4"></div>
+        <div class="col-sm-12 col-md-8 col-lg-4 noResult">
+            <div class= "centerAlign m-1">
+                No results available
+            </div>
+        </div>
+        <div class="col-sm-0 col-md-2 col-lg-4"></div>
+    </div>
+</div>
+
+<div class="mt-5 mb-5">
+    <div class="row">
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+        <div class="col-sm-12 col-md-10 col-lg-8">
+            <app-search-details id="detailBox"  
+            [searchDetailParams]="searchDetailParams" 
+            [reviewParams]="reviewParams"
+            (goBackEvent)="showTable($event)"
+            [resetSectionLast]="resetSec">
+        
+            </app-search-details>
+        </div>
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+    </div>
+</div>

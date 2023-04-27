@@ -1,0 +1,24 @@
+
+.bookingStyle {
+    cursor: pointer;
+    color: black;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.searchStyle {
+    cursor: pointer;
+    color: black;
+}
+
+table{
+    background: white;
+    border-radius: 12px;
+}
+
+.noResult {
+    background-color: white;
+    /* border: 1px solid lightgray; */
+    color: red;
+    border-radius: 12px;
+}

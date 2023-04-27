@@ -1,0 +1,6 @@
+# Source / Reference:
+# https://cloud.google.com/appengine/docs/legacy/standard/python/reference/dispatch-yaml
+dispatch:
+    # Send all trafic on /api to api service.
+    - url: '*/api/*'
+      service: api
