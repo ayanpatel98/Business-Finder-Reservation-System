@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { geoResponse, ipinfoResponse, searchTable } from './model';
 
 
-// const  base_backend_api = 'http://localhost:8080'
-const  base_backend_api = 'https://api-dot-business-search-reserve-081998.uw.r.appspot.com'
+const  base_backend_api = 'http://localhost:8080'
+// const  base_backend_api = 'https://api-dot-business-search-reserve-081998.uw.r.appspot.com'
 
 // Google maps geo location
 const  base_geo_api = 'https://maps.googleapis.com/maps/api/geocode/json'
-const  base_geo_api_key = 'AIzaSyCxyrgZ_Jw6ZFo4vG3AAPnsAk6LHfimJS8'
+// const  base_geo_api_key = 'AIzaSyCxyrgZ_Jw6ZFo4vG3AAPnsAk6LHfimJS8'
+const  base_geo_api_key = 'AIzaSyB20-LpdoG0_8R2Z4ANkP2hmWlJ8iGhIyw'
 
 // IPINFO API
 const  base_geo_api_ipinfo = 'https://ipinfo.io'
