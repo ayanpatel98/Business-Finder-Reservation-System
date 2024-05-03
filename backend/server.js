@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-// Newly added 1 lined below
 app.use(express.static('./public/frontend'))
 // const cors = require('cors');
 const port = parseInt(process.env.PORT) || 8080;
@@ -8,11 +7,11 @@ const port = parseInt(process.env.PORT) || 8080;
 // Destination API URL
 const base_url = 'https://api.yelp.com/v3/'
 const api_key = 'uQGYSvwIBI7fLrs1DQFuL85V1ZPNBiwSLSlsSucGmAe319_tqpUs-FeyRFGJ6WudJ_EFx-gWLKCvdYWONxicky4gm7K93LhK1GT6U3P5GZXXJZzCIEq593EZPQsdY3Yx'
-const HEADERS = {'Authorization': 'bearer ' + api_key}
+const HEADERS = { 'Authorization': 'bearer ' + api_key }
 // Export the common elements
 module.exports = {
-    headers:HEADERS,
-    base_url:base_url
+    headers: HEADERS,
+    base_url: base_url
 }
 
 // Define Routes

@@ -3,11 +3,6 @@
     border-radius: 12px;
 }
 
-/* .my-google-map .map-container{
-    width: 100% !important;
-    height: 100% !important;
-} */
-
 .reviewDiv:nth-of-type(odd){
     background-color: #F3F2F3;
 }

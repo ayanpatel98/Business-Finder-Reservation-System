@@ -1,10 +1,10 @@
 <div class="container">
     <ul class="nav justify-content-end mt-2">
         <li class="nav-item active">
-          <a class="nav-link searchStyle p-2 mx-1" [routerLink]="'../search'">Search</a>
+            <a class="nav-link searchStyle p-2 mx-1" [routerLink]="'../search'">Search</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link bookingStyle" [routerLink]="'../bookings'">My Bookings</a>
+            <a class="nav-link bookingStyle" [routerLink]="'../bookings'">My Bookings</a>
         </li>
     </ul>
 
@@ -17,64 +17,62 @@
                     <div class="centerAlign">
                         <h2>Business Search</h2>
                     </div>
-                        <div class="col-sm-12">
-                            <label for="keyword" class="form-label">Keyword<span class="star"> *</span></label>
-                            <input type="text" class="form-control" formControlName="keyword" 
-                            [matAutocomplete]="auto" [formControl]="keywordCtrl" required>
-                            <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngIf="isLoading" class="is-loading">
-                                    <!-- Spinner -->
-                                    <div class="spinner-border" role="status" style="vertical-align: middle;">
-                                        <span class="sr-only"></span>
-                                    </div>
+                    <div class="col-sm-12">
+                        <label for="keyword" class="form-label">Keyword<span class="star"> *</span></label>
+                        <input type="text" class="form-control" formControlName="keyword" [matAutocomplete]="auto"
+                            [formControl]="keywordCtrl" required>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngIf="isLoading" class="is-loading">
+                                <!-- Spinner -->
+                                <div class="spinner-border" role="status" style="vertical-align: middle;">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </mat-option>
+                            <ng-container *ngIf="!isLoading">
+                                <mat-option *ngFor="let keyword of filteredKeywords" [value]="keyword.text">
+                                    <span>{{ keyword.text }}</span>
                                 </mat-option>
-                                <ng-container *ngIf="!isLoading">
-                                    <mat-option *ngFor="let keyword of filteredKeywords" [value]="keyword.text">
-                                        <span>{{ keyword.text }}</span>
-                                    </mat-option>
-                                </ng-container>
-                            </mat-autocomplete>
-                        </div>
-                        <div class="col-sm-6 col-md-6">
-                            <label for="distance" class="form-label">Distance</label>
-                            <input type="text" class="form-control" formControlName="distance" placeholder="10">
-                        </div>
-                        <div class="col-sm-5 col-9">
-                            <label for="category" class="form-label">Category<span class="star"> *</span></label>
-                            <select class="form-select" formControlName="category" required>
-                                <option value="All">Default</option>
-                                <option value="arts">Arts & Entertainment</option>
-                                <option value="health">Health & Medical</option>
-                                <option value="hotelstravel">Hotels & Travel</option>
-                                <option value="food">Food</option>
-                                <option value="professional">Professional Services</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-12">
-                            <label for="location" class="form-label">Location<span class="star"> *</span></label>
-                            <input type="text" class="form-control" formControlName="location" required>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="checkbox" formControlName="autodetect"  autocomplete="off"
+                            </ng-container>
+                        </mat-autocomplete>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <label for="distance" class="form-label">Distance</label>
+                        <input type="text" class="form-control" formControlName="distance" placeholder="10">
+                    </div>
+                    <div class="col-sm-5 col-9">
+                        <label for="category" class="form-label">Category<span class="star"> *</span></label>
+                        <select class="form-select" formControlName="category" required>
+                            <option value="All">Default</option>
+                            <option value="arts">Arts & Entertainment</option>
+                            <option value="health">Health & Medical</option>
+                            <option value="hotelstravel">Hotels & Travel</option>
+                            <option value="food">Food</option>
+                            <option value="professional">Professional Services</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="location" class="form-label">Location<span class="star"> *</span></label>
+                        <input type="text" class="form-control" formControlName="location" required>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="checkbox" formControlName="autodetect" autocomplete="off"
                             style="display: inline !important; width: auto !important; height: 12px;"
                             (change)="autoSelect($event.target)">
-                            <span class="mx-2">Auto-detect my location</span>
-                        </div>
-                        <div class="col-sm-12 centerAlign">
-                            <button type="submit" class="btn btn-danger mx-2">Submit</button>
-                            <button type="reset" class="btn btn-primary mx-2" (click)="resetAllSections()">Clear</button>
-                        </div>
+                        <span class="mx-2">Auto-detect my location</span>
+                    </div>
+                    <div class="col-sm-12 centerAlign">
+                        <button type="submit" class="btn btn-danger mx-2">Submit</button>
+                        <button type="reset" class="btn btn-primary mx-2" (click)="resetAllSections()">Clear</button>
+                    </div>
                 </form>
             </div>
             <div class="col-sm-0 col-md-1 col-lg-3"></div>
         </div>
-    
+
         <div class="row mt-5">
             <div class="col-sm-0 col-md-1 col-lg-1"></div>
             <div class="col-sm-12 col-md-10 col-lg-10">
-                <app-search-table 
-                [searchBoxParams]="searchParams"
-                [resetSection]="resetSection"></app-search-table>
+                <app-search-table [searchBoxParams]="searchParams" [resetSection]="resetSection"></app-search-table>
             </div>
             <div class="col-sm-0 col-md-1 col-lg-1"></div>
         </div>

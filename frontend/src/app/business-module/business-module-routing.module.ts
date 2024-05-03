@@ -5,10 +5,10 @@ import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     redirectTo: 'search',
-    pathMatch: 'full' 
-    
+    pathMatch: 'full'
+
   },
   {
     path: 'search',

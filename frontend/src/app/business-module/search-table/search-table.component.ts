@@ -19,68 +19,62 @@ export class SearchTableComponent implements OnInit, OnChanges {
   @Input() searchBoxParams: any;
   tableData: searchTableData[];
 
-  searchDetailParams: submitParams  | undefined;
-  reviewParams: submitParams  | undefined;
+  searchDetailParams: submitParams | undefined;
+  reviewParams: submitParams | undefined;
   constructor(private formBuilder: FormBuilder,
     private myserv: SearchService,) { }
 
   ngOnInit(): void {
-    
+
   }
-  
+
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.searchBoxParams, 'Second');
     this.resetSec = this.resetSection;
-    if(!this.resetSec) {
+    if (!this.resetSec) {
       // Reset the details section first on change of table component
       this.searchDetailParams = undefined;
       this.reviewParams = undefined;
-      
-      if (this.searchBoxParams!= undefined && this.searchBoxParams['response'].length>0) {
+
+      if (this.searchBoxParams != undefined && this.searchBoxParams['response'].length > 0) {
         this.showMainTable = true;
         let idx = 0;
         this.tableData = this.searchBoxParams['response'];
-        
-          this.tableData.forEach(element => {
-            idx+=1
-            element['idx'] = idx;
-          });
+
+        this.tableData.forEach(element => {
+          idx += 1
+          element['idx'] = idx;
+        });
       }
-      else if (this.searchBoxParams!= undefined && this.searchBoxParams['response'].length==0){
-        this.tableData=[];
+      else if (this.searchBoxParams != undefined && this.searchBoxParams['response'].length == 0) {
+        this.tableData = [];
         this.showMainTable = false;
         // To reset the details section
-        this.reviewParams ==  undefined; 
-        this.searchDetailParams ==  undefined; 
+        this.reviewParams == undefined;
+        this.searchDetailParams == undefined;
       }
     }
-    // else {
-
-    // }
   }
 
   // Business Details Box
-  businessDetails(b_id:any){
-    this.myserv.getBusinessDetails(b_id).subscribe(res =>{
-      console.log(b_id);
-      if(res!= undefined && res['response'].length>0) {
+  businessDetails(b_id: any) {
+    this.myserv.getBusinessDetails(b_id).subscribe(res => {
+      if (res != undefined && res['response'].length > 0) {
         this.showMainTable = false;
         this.searchDetailParams = res;
         this.resetSec = false;
         // Go to the Details section
         let element: any = document.querySelector('#detailBox')
-        element.scrollIntoView({ behavior: 'instant'});
+        element.scrollIntoView({ behavior: 'instant' });
       }
     });
 
-    this.myserv.getBusinessReviews(b_id).subscribe(res =>{
-      // console.log(res);
-        this.reviewParams = res;
+    this.myserv.getBusinessReviews(b_id).subscribe(res => {
+      this.reviewParams = res;
     });
   }
 
 
-  showTable(event:boolean){
+  showTable(event: boolean) {
     this.showMainTable = event;
   }
 

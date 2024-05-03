@@ -9,14 +9,13 @@ const cors = require('cors');
 router.get('/', cors(), (req, res) => {
     // Payload
     let config = {
-        headers:HEADERS
+        headers: HEADERS
     }
     let b_id = String(req.query.b_id);
 
     let business_details_data = []
-    axios.get(base_url+`businesses/`+b_id, config)
+    axios.get(base_url + `businesses/` + b_id, config)
         .then(function (response) {
-            // console.log(response.data);
             business_details_data.push(
                 {
                     'id': response.data['id'],
@@ -33,11 +32,10 @@ router.get('/', cors(), (req, res) => {
                     'coordinates': response.data['coordinates'],
                 }
             );
-            res.json({'status' : response.status, 'response' : business_details_data});
+            res.json({ 'status': response.status, 'response': business_details_data });
         })
         .catch(function (error) {
-            console.log(error);
-            res.json({'status':error.response.status, 'response' : []});
+            res.json({ 'status': error.response.status, 'response': [] });
         })
 })
 

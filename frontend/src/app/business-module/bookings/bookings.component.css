@@ -18,7 +18,6 @@ table{
 
 .noResult {
     background-color: white;
-    /* border: 1px solid lightgray; */
     color: red;
     border-radius: 12px;
 }

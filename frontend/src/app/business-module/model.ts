@@ -1,4 +1,4 @@
-export interface ipinfoResponse{
+export interface ipinfoResponse {
     city?: any,
     country?: any,
     hostname?: any,
@@ -9,19 +9,19 @@ export interface ipinfoResponse{
     region?: any,
     timezone?: any
 }
-export interface geoResponse{
+export interface geoResponse {
     results?: any,
     status?: any,
 }
 // For Api call
-export interface searchTable{
+export interface searchTable {
     results?: any,
     status?: any,
     response?: any
 }
 
 export interface searchTableData {
-    idx?:any,
+    idx?: any,
     categories?: any,
     distance?: any,
     id?: any,
@@ -29,7 +29,7 @@ export interface searchTableData {
     name?: any,
     rating?: any,
 }
-export interface submitParams{
+export interface submitParams {
     response?: any,
     status?: any,
 }
@@ -41,7 +41,7 @@ export interface businessDetails {
     display_phone?: any,
     id?: any,
     is_closed?: any,
-    is_open_now?:any,
+    is_open_now?: any,
     more_info?: string,
     name?: any,
     photos?: any[],

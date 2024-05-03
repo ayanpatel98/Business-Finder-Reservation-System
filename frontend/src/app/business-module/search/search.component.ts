@@ -18,17 +18,17 @@ export class SearchComponent implements OnInit {
   isLoading = false;
   isLocationValid: boolean = false;
   // When the clear button is pressed
-  resetSection:boolean = false;
+  resetSection: boolean = false;
   errorMsg!: string;
   minLengthTerm = 1;
-  filteredKeywords :any;
+  filteredKeywords: any;
   selectedMovie: any = "";
   latitude: any = '';
   longitude: any = '';
-  searchParams:submitParams;
-  localStore:Object | any;
-  loc_keys:any[];
-  bookTableValues:any;
+  searchParams: submitParams;
+  localStore: Object | any;
+  loc_keys: any[];
+  bookTableValues: any;
   searchForm: FormGroup;
   keywordCtrl: FormControl = new FormControl();
 
@@ -38,7 +38,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
- 
+
     // Autocomplete
     this.keywordCtrl.valueChanges
       .pipe(
@@ -56,18 +56,18 @@ export class SearchComponent implements OnInit {
           this.filteredKeywords = [];
           this.isLoading = true;
         }),
-        switchMap(value => this.http.get('http://localhost:8080/autocomplete', {params: {'text':value}})
-        // switchMap(value => this.http.get('https://api-dot-business-search-reserve-081998.uw.r.appspot.com/autocomplete', {params: {'text':value}})
+        switchMap(value => this.http.get('http://localhost:8080/autocomplete', { params: { 'text': value } })
+          // switchMap(value => this.http.get('https://api-dot-business-search-reserve-081998.uw.r.appspot.com/autocomplete', {params: {'text':value}})
           .pipe(
             finalize(() => {
               this.isLoading = false;
-              
+
             }),
           )
         )
       )
       .subscribe((data: any) => {
-        
+
         if (data['status'] != 200) {
           this.errorMsg = 'No keywords Found';
           this.filteredKeywords = [];
@@ -75,11 +75,10 @@ export class SearchComponent implements OnInit {
           this.errorMsg = "";
           this.filteredKeywords = data['response'];
         }
-        console.log(this.filteredKeywords, this.keywordCtrl.value);
       });
-    
+
   }
-  
+
   createForm() {
     this.searchForm = this.formBuilder.group({
       keyword: [null, Validators.required],
@@ -91,24 +90,23 @@ export class SearchComponent implements OnInit {
   }
 
   getTable(): void {
-      let term = this.keywordCtrl.value;
-      let latitude = this.latitude;
-      let longitude = this.longitude;
-      let categories = this.searchForm.controls['category'].value;
-      let radius = String(Number(this.searchForm.controls['distance'].value)*1609);
-      this.myserv.getSearchTable(term,latitude,longitude,categories,radius).subscribe(res =>{
-        // console.log(res, 'first');
-        this.searchParams = res;
-        this.resetSection = false
-      });
+    let term = this.keywordCtrl.value;
+    let latitude = this.latitude;
+    let longitude = this.longitude;
+    let categories = this.searchForm.controls['category'].value;
+    let radius = String(Number(this.searchForm.controls['distance'].value) * 1609);
+    this.myserv.getSearchTable(term, latitude, longitude, categories, radius).subscribe(res => {
+      this.searchParams = res;
+      this.resetSection = false
+    });
   }
 
   // AutoSelect Checkbox function
   autoSelect(target: any) {
-    let locList :any[]
-    if (target.checked){
+    let locList: any[]
+    if (target.checked) {
       this.searchForm.get('location')?.disable();
-      this.myserv.getIpinfo().subscribe(res =>{
+      this.myserv.getIpinfo().subscribe(res => {
         locList = res.loc.split(',');
         this.latitude = Number(locList[0]);
         this.longitude = Number(locList[1]);
@@ -117,7 +115,7 @@ export class SearchComponent implements OnInit {
       });
     }
     else {
-      this.searchForm.value.location='';
+      this.searchForm.value.location = '';
       this.searchForm.get('location')?.enable();
       this.latitude = '';
       this.longitude = '';
@@ -127,23 +125,20 @@ export class SearchComponent implements OnInit {
 
   // Geto Location from location field
   submit(): any {
-    if (this.isLocationValid){
+    if (this.isLocationValid) {
       this.getTable()
     }
     else {
-      this.myserv.getGoogleGeo(this.searchForm.controls['location'].value).subscribe(res =>{
-        if (res['status']!='OK') {
+      this.myserv.getGoogleGeo(this.searchForm.controls['location'].value).subscribe(res => {
+        if (res['status'] != 'OK') {
           alert('Enter Correct Location!!');
           this.latitude = '';
           this.longitude = '';
-          // this.isLocationValid = false;
         }
         else {
           this.latitude = res['results'][0]['geometry']['location']['lat'];
           this.longitude = res['results'][0]['geometry']['location']['lng'];
-          // this.isLocationValid = false;
           this.getTable();
-          // console.log(this.latitude, this.longitude);
         }
       });
     }
@@ -157,8 +152,4 @@ export class SearchComponent implements OnInit {
     this.longitude = '';
     this.isLocationValid = false;
   }
-
-
-
-
 }

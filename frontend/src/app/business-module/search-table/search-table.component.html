@@ -1,6 +1,5 @@
-
 <div *ngIf="!resetSec && this.searchBoxParams!= undefined && this.searchBoxParams['response'].length>0">
-    <div class="busiSearch"  *ngIf="showMainTable">
+    <div class="busiSearch" *ngIf="showMainTable">
         <table class="table">
             <thead>
                 <tr>
@@ -35,13 +34,12 @@
                     </td>
                     <td>
                         <a class="p-2" (click)="businessDetails(cell['id'])">
-                            <!-- {{(cell['distance'])/1609 | number:'1.2-2'}} -->
                             {{(cell['distance'])/1609 | number:'1.0-0'}}
                         </a>
                     </td>
                 </tr>
             </tbody>
-          </table>
+        </table>
     </div>
 </div>
 
@@ -49,7 +47,7 @@
     <div class="row" style="margin-left: 0px; margin-right: 0px;">
         <div class="col-sm-0 col-md-2 col-lg-4"></div>
         <div class="col-sm-12 col-md-8 col-lg-4 noResult">
-            <div class= "centerAlign m-1">
+            <div class="centerAlign m-1">
                 No results available
             </div>
         </div>
@@ -61,12 +59,9 @@
     <div class="row">
         <div class="col-sm-0 col-md-1 col-lg-2"></div>
         <div class="col-sm-12 col-md-10 col-lg-8">
-            <app-search-details id="detailBox"  
-            [searchDetailParams]="searchDetailParams" 
-            [reviewParams]="reviewParams"
-            (goBackEvent)="showTable($event)"
-            [resetSectionLast]="resetSec">
-        
+            <app-search-details id="detailBox" [searchDetailParams]="searchDetailParams" [reviewParams]="reviewParams"
+                (goBackEvent)="showTable($event)" [resetSectionLast]="resetSec">
+
             </app-search-details>
         </div>
         <div class="col-sm-0 col-md-1 col-lg-2"></div>
